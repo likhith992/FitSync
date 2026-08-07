@@ -1,5 +1,5 @@
 
-# Fitness Tracker
+# FitSync
 
 A full-fitness tracker application built for improving your fitness journey.
 
