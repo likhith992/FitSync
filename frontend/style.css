@@ -1,13 +1,23 @@
+/* ========================================
+   1. Global Styles
+======================================== */
+
 * {
     box-sizing: border-box;
 }
 
 body {
+    margin: 0;
     background-color: #f5f7fa;
     color: #222;
     font-family: Arial, sans-serif;
     font-size: 16px;
 }
+
+
+/* ========================================
+   2. Typography
+======================================== */
 
 h1 {
     color: #2563eb;
@@ -19,19 +29,66 @@ h2 {
     color: #1e3a8a;
 }
 
-.dashboard {
-    display: flex; 
-    gap: 20px; 
+h3 {
+    color: #374151;
 }
+
+p {
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   3. Navigation
+======================================== */
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #1d4ed8;
+}
+
+
+/* ========================================
+   4. Dashboard
+======================================== */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+
+/* ========================================
+   5. FitSync Sections / Cards
+======================================== */
 
 .fitsync-section {
     background-color: white;
     padding: 20px;
-    margin: 20px auto;
     border: 1px solid #e5e7eb;
     border-radius: 12px;
-    width: 80%;
 }
+
+.workout-section {
+    grid-column: 1 / -1;
+}
+
+
+/* ========================================
+   6. Form Elements
+======================================== */
 
 input[type="text"],
 input[type="number"],
@@ -39,6 +96,8 @@ input[type="date"],
 input[type="email"],
 input[type="password"],
 select {
+    width: 100%;
+    max-width: 400px;
     padding: 10px;
     border: 1px solid #d1d5db;
     border-radius: 8px;
@@ -48,6 +107,11 @@ select {
 label {
     font-weight: 600;
 }
+
+
+/* ========================================
+   7. Buttons
+======================================== */
 
 button {
     background-color: #2563eb;
@@ -61,4 +125,22 @@ button {
 
 button:hover {
     background-color: #1d4ed8;
+}
+
+
+/* ========================================
+   8. Responsive Design
+======================================== */
+
+@media (max-width: 768px) {
+
+    .dashboard {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
 }
