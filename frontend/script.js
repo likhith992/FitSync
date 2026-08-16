@@ -1,30 +1,22 @@
-const appName = "FitSync";
-
+let age = 20;
 let weight = 70;
 let goal = "Build Muscle";
+let profileCreated = true;
 
-console.log(appName);
-console.log("Weight:", weight);
-console.log("Goal:", goal);
+if (!profileCreated) {
 
-if (goal === "Build Muscle") {
+    console.log("Please create your FitSync profile.");
 
-    console.log("Recommended focus: Muscle Building");
+} else if (goal === "Build Muscle" && weight > 0) {
 
-} else if (goal === "Lose Weight") {
+    console.log("FitSync: Generate a muscle-building plan.");
 
-    console.log("Recommended focus: Fat Loss");
+} else if (goal === "Lose Weight" && weight > 0) {
 
-} else if (goal === "Maintain Weight") {
-
-    console.log("Recommended focus: Weight Maintenance");
-
-} else if (goal === "Gain Weight") {
-
-    console.log("Recommended focus: Healthy Weight Gain");
+    console.log("FitSync: Generate a fat-loss plan.");
 
 } else {
 
-    console.log("Please select a fitness goal.");
+    console.log("FitSync: Please check your profile information.");
 
 }
