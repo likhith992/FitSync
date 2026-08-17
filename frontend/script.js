@@ -37,7 +37,7 @@ function getGoalMessages(goal) {
 const weight =70;
 const goal = "Build Muscle";
 
-const protein = calculateProtein(weight);
+const proteins = calculateProtein(weight);
 const goalMessage = getGoalMessages(goal);
 
 console.log(appName);
