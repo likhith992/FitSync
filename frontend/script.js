@@ -43,5 +43,5 @@ const goalMessage = getGoalMessages(goal);
 console.log(appNames);
 console.log("Weight:", weight, "kg");
 console.log("Goal:", goal);
-console.log("Protein:", protein, "g");
+console.log("Protein:", proteins, "g");
 console.log(getGoalMessages);
