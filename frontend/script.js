@@ -1,22 +1,47 @@
-let age = 20;
-let weight = 70;
-let goal = "Build Muscle";
-let profileCreated = true;
+const appName = "FitSync";
 
-if (!profileCreated) {
+function calculateProtein(weight) {
 
-    console.log("Please create your FitSync profile.");
+    const proteinPerKg = 2;
 
-} else if (goal === "Build Muscle" && weight > 0) {
-
-    console.log("FitSync: Generate a muscle-building plan.");
-
-} else if (goal === "Lose Weight" && weight > 0) {
-
-    console.log("FitSync: Generate a fat-loss plan.");
-
-} else {
-
-    console.log("FitSync: Please check your profile information.");
-
+    return weight * proteinPerKg;
 }
+
+
+function getGoalMessage(goal) {
+
+    if (goal === "Build Muscle") {
+
+        return "Focus on strength training and adequate nutrition.";
+
+    } else if (goal === "Lose Weight") {
+
+        return "Focus on sustainable fat loss and regular activity.";
+
+    } else if (goal === "Maintain Weight") {
+
+        return "Focus on maintaining your current weight and activity.";
+
+    } else if (goal === "Gain Weight") {
+
+        return "Focus on healthy weight gain and strength training.";
+
+    } else {
+
+        return "Please select a valid fitness goal.";
+
+    }
+}
+
+
+const weight = 70;
+const goal = "Build Muscle";
+
+const protein = calculateProtein(weight);
+const goalMessage = getGoalMessage(goal);
+
+console.log(appName);
+console.log("Weight:", weight, "kg");
+console.log("Goal:", goal);
+console.log("Protein:", protein, "g");
+console.log(goalMessage);
