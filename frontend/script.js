@@ -1,4 +1,4 @@
-const appName = "FitSync";
+const appNames = "FitSync";
 
 function calculateProtein(weight) {
 
@@ -40,7 +40,7 @@ const goal = "Build Muscle";
 const proteins = calculateProtein(weight);
 const goalMessage = getGoalMessages(goal);
 
-console.log(appName);
+console.log(appNames);
 console.log("Weight:", weight, "kg");
 console.log("Goal:", goal);
 console.log("Protein:", protein, "g");
