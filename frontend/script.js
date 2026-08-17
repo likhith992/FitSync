@@ -3,7 +3,7 @@ const appName = "FitSync";
 function calculateProtein(weight) {
 
     const proteinPerKg = 2;
-
+     
     return weight * proteinPerKg;
 }
 
@@ -34,7 +34,7 @@ function getGoalMessage(goal) {
 }
 
 
-const weight = 70;
+const weight =70;
 const goal = "Build Muscle";
 
 const protein = calculateProtein(weight);
