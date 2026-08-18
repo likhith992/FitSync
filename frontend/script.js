@@ -2,7 +2,7 @@ const appNames = "FitSync";
 
 function calculateProtein(weight) {
 
-    const proteinPerKg = 2;
+    const proteinPerKg = 2;  
 
     return weight * proteinPerKg;
 }
