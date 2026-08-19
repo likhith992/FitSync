@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -10,615 +9,768 @@
 
     <title>FitSync</title>
 
-  <link rel="stylesheet" href="style.css">
-  
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-   <header>
+    <header>
 
-    <h1>FitSync</h1>
+        <h1>FitSync</h1>
 
-    <nav>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Workout</a>
+            <a href="#">Diet</a>
+            <a href="#">Progress</a>
+        </nav>
 
-        <a href="#">Home</a>
-        <a href="#">Workout</a>
-        <a href="#">Diet</a>
-        <a href="#">Progress</a>
+    </header>
 
-    </nav>
 
-</header>
+    <main>
 
-<main>
+        <div class="dashboard">
 
-    <div class="dashboard">
 
-    <section class="fitsync-section">
+            <!-- =========================
+                 WELCOME SECTION
+            ========================== -->
 
-        <h2>Welcome Back!</h2>
-
-        <p>
-            Track your workouts, nutrition,
-            and fitness progress in one place.
-        </p>
+            <section class="fitsync-section">
 
-    </section>
+                <h2>Welcome Back!</h2>
 
-    <section class="fitsync-section">
+                <p>
+                    Track your workouts, nutrition,
+                    and fitness progress in one place.
+                </p>
 
-    <h2>Create Your FitSync Profile</h2>
-
-    <form>
+            </section>
 
-        <label for="name">Name</label>
-        <br>
-        <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Enter your name"
-            required
-        >
 
-        <br><br>
+            <!-- =========================
+                 FITSYNC PROFILE
+            ========================== -->
 
-        <label for="age">Age</label>
-        <br>
-        <input
-            type="number"
-            id="age"
-            name="age"
-            placeholder="Enter your age"
-            required
-        >
+            <section class="fitsync-section">
 
-        <br><br>
+                <h2>Create Your FitSync Profile</h2>
 
-        <label for="height">Height (cm)</label>
-        <br>
-        <input
-            type="number"
-            id="height"
-            name="height"
-            placeholder="Enter your height"
-            required
-        >
+                <form id="profile-form">
 
-        <br><br>
+                    <label for="name">Name</label>
+                    <br>
 
-        <label for="weight">Weight (kg)</label>
-        <br>
-        <input
-            type="number"
-            id="weight"
-            name="weight"
-            placeholder="Enter your weight"
-            required
-        >
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your name"
+                        required
+                    >
 
-        <br><br>
+                    <br><br>
 
-        <h3>Fitness Goal</h3>
 
-        <input
-            type="radio"
-            id="lose-weight"
-            name="goal"
-            value="lose-weight"
-        >
-        <label for="lose-weight">Lose Weight</label>
+                    <label for="age">Age</label>
+                    <br>
 
-        <br>
+                    <input
+                        type="number"
+                        id="age"
+                        name="age"
+                        placeholder="Enter your age"
+                        required
+                    >
 
-        <input
-            type="radio"
-            id="maintain-weight"
-            name="goal"
-            value="maintain-weight"
-        >
-        <label for="maintain-weight">Maintain Weight</label>
+                    <br><br>
 
-        <br>
 
-        <input
-            type="radio"
-            id="build-muscle"
-            name="goal"
-            value="build-muscle"
-        >
-        <label for="build-muscle">Build Muscle</label>
+                    <label for="height">Height (cm)</label>
+                    <br>
 
-        <br>
+                    <input
+                        type="number"
+                        id="height"
+                        name="height"
+                        placeholder="Enter your height"
+                        required
+                    >
 
-        <input
-            type="radio"
-            id="gain-weight"
-            name="goal"
-            value="gain-weight"
-        >
-        <label for="gain-weight">Gain Weight</label>
+                    <br><br>
 
-        <br><br>
 
-        <label for="activity-level">Activity Level</label>
-        <br>
+                    <label for="weight">Weight (kg)</label>
+                    <br>
 
-        <select
-            id="activity-level"
-            name="activity-level"
-        >
+                    <input
+                        type="number"
+                        id="weight"
+                        name="weight"
+                        placeholder="Enter your weight"
+                        required
+                    >
 
-            <option value="sedentary">Sedentary</option>
-            <option value="light">Lightly Active</option>
-            <option value="moderate">Moderately Active</option>
-            <option value="very-active">Very Active</option>
+                    <br><br>
 
-        </select>
 
-        <br><br>
+                    <h3>Fitness Goal</h3>
 
-        <button type="submit">
-            Create Profile
-        </button>
 
-    </form>
+                    <input
+                        type="radio"
+                        id="lose-weight"
+                        name="goal"
+                        value="Lose Weight"
+                        required
+                    >
 
-</section>
-    
-    <section class="fitsync-section workout-section">
+                    <label for="lose-weight">
+                        Lose Weight
+                    </label>
 
-    <h2>FitSync Workout Planner</h2>
+                    <br>
 
-    <p>
-        Select a day and workout type to view your routine.
-    </p>
 
-    <form>
+                    <input
+                        type="radio"
+                        id="maintain-weight"
+                        name="goal"
+                        value="Maintain Weight"
+                    >
 
-        <label for="workout-day">Select Day</label>
-        <br>
+                    <label for="maintain-weight">
+                        Maintain Weight
+                    </label>
 
-        <select
-            id="workout-day"
-            name="workout-day"
-        >
+                    <br>
 
-            <option value="monday">Monday</option>
-            <option value="tuesday">Tuesday</option>
-            <option value="wednesday">Wednesday</option>
-            <option value="thursday">Thursday</option>
-            <option value="friday">Friday</option>
-            <option value="saturday">Saturday</option>
-            <option value="sunday">Sunday</option>
 
-        </select>
+                    <input
+                        type="radio"
+                        id="build-muscle"
+                        name="goal"
+                        value="Build Muscle"
+                    >
 
-        <br><br>
+                    <label for="build-muscle">
+                        Build Muscle
+                    </label>
 
-        <label for="workout-type">Workout Type</label>
-        <br>
+                    <br>
 
-        <select
-            id="workout-type"
-            name="workout-type"
-        >
 
-            <option value="strength">
-                Strength Training
-            </option>
+                    <input
+                        type="radio"
+                        id="gain-weight"
+                        name="goal"
+                        value="Gain Weight"
+                    >
 
-            <option value="cardio">
-                Cardio
-            </option>
+                    <label for="gain-weight">
+                        Gain Weight
+                    </label>
 
-            <option value="hiit">
-                HIIT
-            </option>
+                    <br><br>
 
-            <option value="flexibility">
-                Flexibility
-            </option>
 
-        </select>
+                    <label for="activity-level">
+                        Activity Level
+                    </label>
 
-        <br><br>
+                    <br>
 
-        <button type="submit">
-            Show Workout
-        </button>
+                    <select
+                        id="activity-level"
+                        name="activity-level"
+                        required
+                    >
 
-    </form>
+                        <option value="sedentary">
+                            Sedentary
+                        </option>
 
-</section>
+                        <option value="light">
+                            Lightly Active
+                        </option>
 
-   <section class="fitsync-section">
+                        <option value="moderate">
+                            Moderately Active
+                        </option>
 
-    <h2>FitSync Diet Planner</h2>
+                        <option value="very-active">
+                            Very Active
+                        </option>
 
-    <p>
-        Select your fitness goal to receive suitable diet recommendations.
-    </p>
+                    </select>
 
-    <form>
+                    <br><br>
 
-        <label for="diet-goal">
-            Fitness Goal
-        </label>
 
-        <br>
+                    <button type="submit">
+                        Create Profile
+                    </button>
 
-        <select
-            id="diet-goal"
-            name="diet-goal"
-        >
+                </form>
 
-            <option value="lose-weight">
-                Lose Weight
-            </option>
 
-            <option value="maintain-weight">
-                Maintain Weight
-            </option>
+                <!-- JavaScript will display profile results here -->
 
-            <option value="build-muscle">
-                Build Muscle
-            </option>
+                <div id="profile-result"></div>
 
-            <option value="gain-weight">
-                Gain Weight
-            </option>
+            </section>
 
-        </select>
 
-        <br><br>
 
-        <label for="diet-preference">
-            Diet Preference
-        </label>
+            <!-- =========================
+                 WORKOUT PLANNER
+            ========================== -->
 
-        <br>
+            <section class="fitsync-section workout-section">
 
-        <select
-            id="diet-preference"
-            name="diet-preference"
-        >
+                <h2>FitSync Workout Planner</h2>
 
-            <option value="vegetarian">
-                Vegetarian
-            </option>
+                <p>
+                    Select a day and workout type
+                    to view your routine.
+                </p>
 
-            <option value="non-vegetarian">
-                Non-Vegetarian
-            </option>
 
-            <option value="vegan">
-                Vegan
-            </option>
+                <form id="workout-form">
 
-        </select>
+                    <label for="workout-day">
+                        Select Day
+                    </label>
 
-        <br><br>
+                    <br>
 
-        <button type="submit">
-            Get Diet Recommendation
-        </button>
+                    <select
+                        id="workout-day"
+                        name="workout-day"
+                        required
+                    >
 
-    </form>
+                        <option value="monday">
+                            Monday
+                        </option>
 
-</section>
+                        <option value="tuesday">
+                            Tuesday
+                        </option>
 
-   <section class="fitsync-section ">
+                        <option value="wednesday">
+                            Wednesday
+                        </option>
 
-    <h2>Today's Workout</h2>
+                        <option value="thursday">
+                            Thursday
+                        </option>
 
-    <h3>Chest & Triceps</h3>
+                        <option value="friday">
+                            Friday
+                        </option>
 
-    <table>
+                        <option value="saturday">
+                            Saturday
+                        </option>
 
-        <thead>
+                        <option value="sunday">
+                            Sunday
+                        </option>
 
-            <tr>
-                <th>Exercise</th>
-                <th>Sets</th>
-                <th>Reps</th>
-            </tr>
+                    </select>
 
-        </thead>
+                    <br><br>
 
-        <tbody>
 
-            <tr>
-                <td>Bench Press</td>
-                <td>4</td>
-                <td>8</td>
-            </tr>
+                    <label for="workout-type">
+                        Workout Type
+                    </label>
 
-            <tr>
-                <td>Incline Dumbbell Press</td>
-                <td>3</td>
-                <td>10</td>
-            </tr>
+                    <br>
 
-            <tr>
-                <td>Push Ups</td>
-                <td>3</td>
-                <td>12</td>
-            </tr>
+                    <select
+                        id="workout-type"
+                        name="workout-type"
+                        required
+                    >
 
-            <tr>
-                <td>Tricep Pushdown</td>
-                <td>3</td>
-                <td>12</td>
-            </tr>
+                        <option value="strength">
+                            Strength Training
+                        </option>
 
-        </tbody>
+                        <option value="cardio">
+                            Cardio
+                        </option>
 
-    </table>
+                        <option value="hiit">
+                            HIIT
+                        </option>
 
-</section>
-   
-   <section class="fitsync-section">
+                        <option value="flexibility">
+                            Flexibility
+                        </option>
 
-    <h2>Today's FitSync Meal Plan</h2>
+                    </select>
 
-    <article>
+                    <br><br>
 
-        <h3>Breakfast</h3>
 
-        <ul>
+                    <button type="submit">
+                        Show Workout
+                    </button>
 
-            <li>Oats</li>
-            <li>Eggs</li>
-            <li>Banana</li>
+                </form>
 
-        </ul>
 
-    </article>
+                <!-- JavaScript workout results -->
 
+                <div id="workout-result"></div>
 
-    <article>
+            </section>
 
-        <h3>Lunch</h3>
 
-        <ul>
 
-            <li>Rice</li>
-            <li>Chicken</li>
-            <li>Vegetables</li>
+            <!-- =========================
+                 DIET PLANNER
+            ========================== -->
 
-        </ul>
+            <section class="fitsync-section">
 
-    </article>
+                <h2>FitSync Diet Planner</h2>
 
+                <p>
+                    Select your fitness goal to receive
+                    suitable diet recommendations.
+                </p>
 
-    <article>
 
-        <h3>Snack</h3>
+                <form id="diet-form">
 
-        <ul>
+                    <label for="diet-goal">
+                        Fitness Goal
+                    </label>
 
-            <li>Fruits</li>
-            <li>Nuts</li>
+                    <br>
 
-        </ul>
+                    <select
+                        id="diet-goal"
+                        name="diet-goal"
+                        required
+                    >
 
-    </article>
+                        <option value="Lose Weight">
+                            Lose Weight
+                        </option>
 
+                        <option value="Maintain Weight">
+                            Maintain Weight
+                        </option>
 
-    <article>
+                        <option value="Build Muscle">
+                            Build Muscle
+                        </option>
 
-        <h3>Dinner</h3>
+                        <option value="Gain Weight">
+                            Gain Weight
+                        </option>
 
-        <ul>
+                    </select>
 
-            <li>Chapati</li>
-            <li>Paneer</li>
-            <li>Salad</li>
+                    <br><br>
 
-        </ul>
 
-    </article>
+                    <label for="diet-preference">
+                        Diet Preference
+                    </label>
 
-</section>
+                    <br>
 
+                    <select
+                        id="diet-preference"
+                        name="diet-preference"
+                        required
+                    >
 
-   <section class="fitsync-section">
+                        <option value="vegetarian">
+                            Vegetarian
+                        </option>
 
-    <h2>FitSync Daily Nutrition</h2>
+                        <option value="non-vegetarian">
+                            Non-Vegetarian
+                        </option>
 
-    <p>
-        Your recommended daily nutrition targets.
-    </p>
+                        <option value="vegan">
+                            Vegan
+                        </option>
 
-    <table>
+                    </select>
 
-        <thead>
+                    <br><br>
 
-            <tr>
-                <th>Nutrient</th>
-                <th>Daily Target</th>
-            </tr>
 
-        </thead>
+                    <button type="submit">
+                        Get Diet Recommendation
+                    </button>
 
-        <tbody>
+                </form>
 
-            <tr>
-                <td>Calories</td>
-                <td>2500 kcal</td>
-            </tr>
 
-            <tr>
-                <td>Protein</td>
-                <td>140 g</td>
-            </tr>
+                <!-- JavaScript diet results -->
 
-            <tr>
-                <td>Carbohydrates</td>
-                <td>300 g</td>
-            </tr>
+                <div id="diet-result"></div>
 
-            <tr>
-                <td>Fat</td>
-                <td>70 g</td>
-            </tr>
+            </section>
 
-            <tr>
-                <td>Water</td>
-                <td>3 litres</td>
-            </tr>
 
-        </tbody>
 
-    </table>
+            <!-- =========================
+                 TODAY'S WORKOUT
+            ========================== -->
 
-</section>
+            <section class="fitsync-section">
 
-   <section class="fitsync-section">
+                <h2>Today's Workout</h2>
 
-    <h2>FitSync Progress Tracker</h2>
+                <h3>Chest & Triceps</h3>
 
-    <form>
+                <table>
 
-        <label for="progress-weight">
-            Today's Weight (kg)
-        </label>
+                    <thead>
 
-        <br>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Sets</th>
+                            <th>Reps</th>
+                        </tr>
 
-        <input
-            type="number"
-            id="progress-weight"
-            name="progress-weight"
-            step="0.1"
-            placeholder="Enter your weight"
-            required
-        >
+                    </thead>
 
-        <br><br>
 
-        <label for="progress-date">
-            Date
-        </label>
+                    <tbody>
 
-        <br>
+                        <tr>
+                            <td>Bench Press</td>
+                            <td>4</td>
+                            <td>8</td>
+                        </tr>
 
-        <input
-            type="date"
-            id="progress-date"
-            name="progress-date"
-            required
-        >
+                        <tr>
+                            <td>Incline Dumbbell Press</td>
+                            <td>3</td>
+                            <td>10</td>
+                        </tr>
 
-        <br><br>
+                        <tr>
+                            <td>Push Ups</td>
+                            <td>3</td>
+                            <td>12</td>
+                        </tr>
 
-        <button type="submit">
-            Save Progress
-        </button>
+                        <tr>
+                            <td>Tricep Pushdown</td>
+                            <td>3</td>
+                            <td>12</td>
+                        </tr>
 
-    </form>
+                    </tbody>
 
-</section>
+                </table>
 
-  <section class="fitsync-section">
+            </section>
 
-    <h2>FitSync Weight Management Guide</h2>
 
-    <article>
 
-        <h3>Building Muscle</h3>
+            <!-- =========================
+                 MEAL PLAN
+            ========================== -->
 
-        <ul>
+            <section class="fitsync-section">
 
-            <li>
-                Follow regular resistance training.
-            </li>
+                <h2>Today's FitSync Meal Plan</h2>
 
-            <li>
-                Consume sufficient protein and calories.
-            </li>
 
-            <li>
-                Gradually increase training intensity.
-            </li>
+                <article>
 
-            <li>
-                Prioritize adequate recovery and sleep.
-            </li>
+                    <h3>Breakfast</h3>
 
-        </ul>
+                    <ul>
+                        <li>Oats</li>
+                        <li>Eggs</li>
+                        <li>Banana</li>
+                    </ul>
 
-    </article>
+                </article>
 
 
-    <article>
+                <article>
 
-        <h3>Fat Loss</h3>
+                    <h3>Lunch</h3>
 
-        <ul>
+                    <ul>
+                        <li>Rice</li>
+                        <li>Chicken</li>
+                        <li>Vegetables</li>
+                    </ul>
 
-            <li>
-                Maintain an appropriate calorie deficit.
-            </li>
+                </article>
 
-            <li>
-                Keep protein intake adequate.
-            </li>
 
-            <li>
-                Include resistance training.
-            </li>
+                <article>
 
-            <li>
-                Maintain regular physical activity.
-            </li>
+                    <h3>Snack</h3>
 
-        </ul>
+                    <ul>
+                        <li>Fruits</li>
+                        <li>Nuts</li>
+                    </ul>
 
-    </article>
+                </article>
 
 
-    <article>
+                <article>
 
-        <h3>Healthy Weight Gain</h3>
+                    <h3>Dinner</h3>
 
-        <ul>
+                    <ul>
+                        <li>Chapati</li>
+                        <li>Paneer</li>
+                        <li>Salad</li>
+                    </ul>
 
-            <li>
-                Consume an appropriate calorie surplus.
-            </li>
+                </article>
 
-            <li>
-                Include protein-rich foods.
-            </li>
+            </section>
 
-            <li>
-                Focus on strength training.
-            </li>
 
-            <li>
-                Monitor your progress regularly.
-            </li>
 
-        </ul>
+            <!-- =========================
+                 DAILY NUTRITION
+            ========================== -->
 
-    </article>
+            <section class="fitsync-section">
 
-</section> 
+                <h2>FitSync Daily Nutrition</h2>
 
-</div>
-  
-  </main>
+                <p>
+                    Your recommended daily nutrition targets.
+                </p>
 
-<footer>
 
-    <p>FitSync © 2026</p>
+                <table>
 
-</footer>
+                    <thead>
 
-<script src="script.js"></script>
+                        <tr>
+                            <th>Nutrient</th>
+                            <th>Daily Target</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+                            <td>Calories</td>
+                            <td>2500 kcal</td>
+                        </tr>
+
+                        <tr>
+                            <td>Protein</td>
+                            <td>140 g</td>
+                        </tr>
+
+                        <tr>
+                            <td>Carbohydrates</td>
+                            <td>300 g</td>
+                        </tr>
+
+                        <tr>
+                            <td>Fat</td>
+                            <td>70 g</td>
+                        </tr>
+
+                        <tr>
+                            <td>Water</td>
+                            <td>3 litres</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+
+
+            <!-- =========================
+                 PROGRESS TRACKER
+            ========================== -->
+
+            <section class="fitsync-section">
+
+                <h2>FitSync Progress Tracker</h2>
+
+
+                <form id="progress-form">
+
+                    <label for="progress-weight">
+                        Today's Weight (kg)
+                    </label>
+
+                    <br>
+
+                    <input
+                        type="number"
+                        id="progress-weight"
+                        name="progress-weight"
+                        step="0.1"
+                        placeholder="Enter your weight"
+                        required
+                    >
+
+                    <br><br>
+
+
+                    <label for="progress-date">
+                        Date
+                    </label>
+
+                    <br>
+
+                    <input
+                        type="date"
+                        id="progress-date"
+                        name="progress-date"
+                        required
+                    >
+
+                    <br><br>
+
+
+                    <button type="submit">
+                        Save Progress
+                    </button>
+
+                </form>
+
+
+                <!-- JavaScript progress results -->
+
+                <div id="progress-result"></div>
+
+            </section>
+
+
+
+            <!-- =========================
+                 WEIGHT MANAGEMENT GUIDE
+            ========================== -->
+
+            <section class="fitsync-section">
+
+                <h2>FitSync Weight Management Guide</h2>
+
+
+                <article>
+
+                    <h3>Building Muscle</h3>
+
+                    <ul>
+
+                        <li>
+                            Follow regular resistance training.
+                        </li>
+
+                        <li>
+                            Consume sufficient protein and calories.
+                        </li>
+
+                        <li>
+                            Gradually increase training intensity.
+                        </li>
+
+                        <li>
+                            Prioritize adequate recovery and sleep.
+                        </li>
+
+                    </ul>
+
+                </article>
+
+
+                <article>
+
+                    <h3>Fat Loss</h3>
+
+                    <ul>
+
+                        <li>
+                            Maintain an appropriate calorie deficit.
+                        </li>
+
+                        <li>
+                            Keep protein intake adequate.
+                        </li>
+
+                        <li>
+                            Include resistance training.
+                        </li>
+
+                        <li>
+                            Maintain regular physical activity.
+                        </li>
+
+                    </ul>
+
+                </article>
+
+
+                <article>
+
+                    <h3>Healthy Weight Gain</h3>
+
+                    <ul>
+
+                        <li>
+                            Consume an appropriate calorie surplus.
+                        </li>
+
+                        <li>
+                            Include protein-rich foods.
+                        </li>
+
+                        <li>
+                            Focus on strength training.
+                        </li>
+
+                        <li>
+                            Monitor your progress regularly.
+                        </li>
+
+                    </ul>
+
+                </article>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+
+    <footer>
+
+        <p>FitSync © 2026</p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
 
 </body>
 
