@@ -43,6 +43,38 @@ function calculateProtein(weight, goal) {
     return Math.round(weight * proteinPerKg);
 }
 
+function calculateBMI(weight, height) {
+
+    const heightInMeters = height / 100;
+
+    const bmi = weight / (heightInMeters * heightInMeters);
+
+    return Number(bmi.toFixed(2));
+}
+
+function getBMICategory(bmi) {
+
+    if (bmi < 18.5) {
+
+        return "Underweight";
+
+    } 
+    else if (bmi < 25) {
+
+        return "Healthy Weight Range";
+
+    } 
+    else if (bmi < 30) {
+
+        return "Overweight";
+
+    } 
+    else {
+
+        return "Obesity Range";
+
+    }
+}
 
 // ==========================================
 // FITNESS GOAL MESSAGES
@@ -218,6 +250,13 @@ profileForm.addEventListener("submit", function (event) {
             userProfile.goal
         );
 
+    const bmi = calculateBMI(
+    userProfile.weight,
+    userProfile.height
+    );
+
+    const bmiCategory = getBMICategory(bmi);    
+
 
     // ======================================
     // GET GOAL INFORMATION
@@ -252,6 +291,16 @@ profileForm.addEventListener("submit", function (event) {
         <p>
             <strong>Weight:</strong>
             ${userProfile.weight} kg
+        </p>
+
+        <p>
+            <strong>BMI:</strong>
+        ${bmi}
+        </p>
+
+         <p>
+            <strong>BMI Category:</strong>
+        ${bmiCategory}
         </p>
 
         <p>
