@@ -31,6 +31,26 @@ const profileResult =
     document.getElementById("profile-result");
 
 
+// ==========================================
+// DAILY NUTRITION ELEMENTS
+// ==========================================
+
+const calorieTargetElement =
+    document.getElementById("calorie-target");
+
+const proteinTargetElement =
+    document.getElementById("protein-target");
+
+const carbohydrateTargetElement =
+    document.getElementById("carbohydrate-target");
+
+const fatTargetElement =
+    document.getElementById("fat-target");
+
+const waterTargetElement =
+    document.getElementById("water-target");
+
+
 
 // ==========================================
 // PROTEIN CALCULATION
