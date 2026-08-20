@@ -59,6 +59,337 @@ const waterTargetElement =
 
 
 // ==========================================
+// WORKOUT ELEMENTS
+// ==========================================
+
+const workoutForm =
+    document.getElementById("workout-form");
+
+const workoutDay =
+    document.getElementById("workout-day");
+
+const workoutType =
+    document.getElementById("workout-type");
+
+const workoutResult =
+    document.getElementById("workout-result");
+
+
+// ==========================================
+// FITSYNC WORKOUT DATA
+// ==========================================
+
+const workoutData = {
+
+    // ======================================
+    // STRENGTH TRAINING
+    // ======================================
+
+    strength: {
+
+        monday: [
+
+            {
+                exercise: "Bench Press",
+                sets: 4,
+                reps: 8,
+                rest: "90 sec"
+            },
+
+            {
+                exercise: "Incline Dumbbell Press",
+                sets: 3,
+                reps: 10,
+                rest: "60 sec"
+            },
+
+            {
+                exercise: "Shoulder Press",
+                sets: 3,
+                reps: 10,
+                rest: "60 sec"
+            },
+
+            {
+                exercise: "Tricep Pushdown",
+                sets: 3,
+                reps: 12,
+                rest: "60 sec"
+            }
+
+        ],
+
+
+        wednesday: [
+
+            {
+                exercise: "Barbell Squat",
+                sets: 4,
+                reps: 8,
+                rest: "90 sec"
+            },
+
+            {
+                exercise: "Romanian Deadlift",
+                sets: 3,
+                reps: 10,
+                rest: "90 sec"
+            },
+
+            {
+                exercise: "Leg Press",
+                sets: 3,
+                reps: 10,
+                rest: "60 sec"
+            },
+
+            {
+                exercise: "Calf Raises",
+                sets: 3,
+                reps: 15,
+                rest: "45 sec"
+            }
+
+        ],
+
+
+        friday: [
+
+            {
+                exercise: "Lat Pulldown",
+                sets: 4,
+                reps: 10,
+                rest: "60 sec"
+            },
+
+            {
+                exercise: "Seated Cable Row",
+                sets: 3,
+                reps: 10,
+                rest: "60 sec"
+            },
+
+            {
+                exercise: "Dumbbell Curl",
+                sets: 3,
+                reps: 12,
+                rest: "60 sec"
+            },
+
+            {
+                exercise: "Hammer Curl",
+                sets: 3,
+                reps: 12,
+                rest: "60 sec"
+            }
+
+        ]
+
+    },
+
+
+    // ======================================
+    // CARDIO
+    // ======================================
+
+    cardio: {
+
+        monday: [
+
+            {
+                exercise: "Brisk Walking",
+                sets: 1,
+                reps: "20 min",
+                rest: "2 min"
+            },
+
+            {
+                exercise: "Cycling",
+                sets: 1,
+                reps: "15 min",
+                rest: "2 min"
+            }
+
+        ],
+
+
+        wednesday: [
+
+            {
+                exercise: "Jogging",
+                sets: 1,
+                reps: "20 min",
+                rest: "2 min"
+            },
+
+            {
+                exercise: "Cycling",
+                sets: 1,
+                reps: "15 min",
+                rest: "2 min"
+            }
+
+        ],
+
+
+        friday: [
+
+            {
+                exercise: "Running",
+                sets: 1,
+                reps: "20 min",
+                rest: "2 min"
+            },
+
+            {
+                exercise: "Jump Rope",
+                sets: 3,
+                reps: "2 min",
+                rest: "1 min"
+            }
+
+        ]
+
+    },
+
+
+    // ======================================
+    // HIIT
+    // ======================================
+
+    hiit: {
+
+        tuesday: [
+
+            {
+                exercise: "Jumping Jacks",
+                sets: 3,
+                reps: 30,
+                rest: "30 sec"
+            },
+
+            {
+                exercise: "Mountain Climbers",
+                sets: 3,
+                reps: 20,
+                rest: "30 sec"
+            },
+
+            {
+                exercise: "Burpees",
+                sets: 3,
+                reps: 10,
+                rest: "60 sec"
+            },
+
+            {
+                exercise: "High Knees",
+                sets: 3,
+                reps: 30,
+                rest: "30 sec"
+            }
+
+        ],
+
+
+        thursday: [
+
+            {
+                exercise: "Burpees",
+                sets: 3,
+                reps: 10,
+                rest: "60 sec"
+            },
+
+            {
+                exercise: "High Knees",
+                sets: 3,
+                reps: 30,
+                rest: "30 sec"
+            },
+
+            {
+                exercise: "Mountain Climbers",
+                sets: 3,
+                reps: 20,
+                rest: "30 sec"
+            }
+
+        ]
+
+    },
+
+
+    // ======================================
+    // FLEXIBILITY
+    // ======================================
+
+    flexibility: {
+
+        tuesday: [
+
+            {
+                exercise: "Hamstring Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Quad Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Shoulder Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Hip Flexor Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            }
+
+        ],
+
+
+        thursday: [
+
+            {
+                exercise: "Child's Pose",
+                sets: 2,
+                reps: "45 sec",
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Cat-Cow Stretch",
+                sets: 2,
+                reps: 10,
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Cobra Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            }
+
+        ]
+
+    }
+
+};
+
+
+// ==========================================
 // PROTEIN CALCULATION
 // ==========================================
 
@@ -92,7 +423,9 @@ function calculateProtein(weight, goal) {
     }
 
 
-    return Math.round(weight * proteinPerKg);
+    return Math.round(
+        weight * proteinPerKg
+    );
 
 }
 
@@ -112,7 +445,9 @@ function calculateBMI(weight, height) {
         (heightInMeters * heightInMeters);
 
 
-    return Number(bmi.toFixed(2));
+    return Number(
+        bmi.toFixed(2)
+    );
 
 }
 
@@ -293,7 +628,8 @@ function calculateCalorieTarget(
     }
 
 
-    return maintenanceCalories + adjustment;
+    return maintenanceCalories +
+        adjustment;
 
 }
 
@@ -319,7 +655,6 @@ function calculateNutritionTargets(
         proteinCalories;
 
 
-    // For this learning version,
     // 60% of remaining calories
     // are allocated to carbohydrates
     const carbohydrateCalories =
@@ -442,6 +777,126 @@ function getGoalMessages(goal) {
             "Please select a valid fitness goal."
 
     };
+
+}
+
+
+// ==========================================
+// DISPLAY WORKOUT
+// ==========================================
+
+function displayWorkout(
+    workout,
+    day,
+    type
+) {
+
+    // Check whether a workout exists
+    if (!workout) {
+
+        workoutResult.innerHTML = `
+
+            <h3>
+                No Workout Available
+            </h3>
+
+            <p>
+                FitSync does not currently have
+                a ${type} workout for ${day}.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    // Start creating the workout HTML
+    let workoutHTML = `
+
+        <h3>
+            FitSync Workout
+        </h3>
+
+        <p>
+            <strong>Day:</strong>
+            ${day}
+        </p>
+
+        <p>
+            <strong>Workout Type:</strong>
+            ${type}
+        </p>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Exercise</th>
+
+                    <th>Sets</th>
+
+                    <th>Reps / Duration</th>
+
+                    <th>Rest</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+    `;
+
+
+    // Add each exercise to the table
+    workout.forEach(
+        function (exercise) {
+
+            workoutHTML += `
+
+                <tr>
+
+                    <td>
+                        ${exercise.exercise}
+                    </td>
+
+                    <td>
+                        ${exercise.sets}
+                    </td>
+
+                    <td>
+                        ${exercise.reps}
+                    </td>
+
+                    <td>
+                        ${exercise.rest}
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    // Finish the table
+    workoutHTML += `
+
+            </tbody>
+
+        </table>
+
+    `;
+
+
+    // Display the generated workout
+    workoutResult.innerHTML =
+        workoutHTML;
 
 }
 
@@ -732,7 +1187,9 @@ profileForm.addEventListener(
 
         profileResult.innerHTML = `
 
-            <h3>FitSync Profile Created</h3>
+            <h3>
+                FitSync Profile Created
+            </h3>
 
             <p>
                 Welcome,
@@ -848,6 +1305,45 @@ profileForm.addEventListener(
         console.log(
             "Estimated Protein Target:",
             proteinTarget
+        );
+
+    }
+);
+
+
+// ==========================================
+// WORKOUT FORM SUBMISSION
+// ==========================================
+
+workoutForm.addEventListener(
+    "submit",
+    function (event) {
+
+        // Prevent page refresh
+        event.preventDefault();
+
+
+        // Get selected day
+        const selectedDay =
+            workoutDay.value;
+
+
+        // Get selected workout type
+        const selectedType =
+            workoutType.value;
+
+
+        // Find the matching workout
+        const selectedWorkout =
+            workoutData[selectedType]
+            ?. [selectedDay];
+
+
+        // Display the workout
+        displayWorkout(
+            selectedWorkout,
+            selectedDay,
+            selectedType
         );
 
     }
