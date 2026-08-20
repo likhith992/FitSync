@@ -281,6 +281,60 @@ function calculateCalorieTarget(
 
 
 // ==========================================
+// NUTRITION TARGET CALCULATION
+// ==========================================
+
+function calculateNutritionTargets(
+    calorieTarget,
+    proteinTarget
+) {
+
+    const proteinCalories =
+        proteinTarget * 4;
+
+
+    const remainingCalories =
+        calorieTarget - proteinCalories;
+
+
+    const carbohydrateCalories =
+        remainingCalories * 0.60;
+
+
+    const fatCalories =
+        remainingCalories * 0.40;
+
+
+    const carbohydrates =
+        Math.round(
+            carbohydrateCalories / 4
+        );
+
+
+    const fat =
+        Math.round(
+            fatCalories / 9
+        );
+
+
+    return {
+
+        calories: calorieTarget,
+
+        protein: proteinTarget,
+
+        carbohydrates: carbohydrates,
+
+        fat: fat,
+
+        water: 3
+
+    };
+
+}
+
+
+// ==========================================
 // FITNESS GOAL MESSAGES
 // ==========================================
 
@@ -582,6 +636,16 @@ profileForm.addEventListener(
 
 
         // ======================================
+        // CALCULATE NUTRITION TARGETS
+        // ======================================
+
+        const nutritionTargets =
+        calculateNutritionTargets(
+        calorieTarget,
+        proteinTarget
+            );
+
+        // ======================================
         // CREATE FITNESS DATA OBJECT
         // ======================================
 
@@ -597,8 +661,10 @@ profileForm.addEventListener(
                 maintenanceCalories,
 
             calorieTarget:
-                calorieTarget   
+                calorieTarget,
 
+            nutritionTargets:
+                nutritionTargets
         };
 
 
