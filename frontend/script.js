@@ -13,7 +13,7 @@ const ageInput = document.getElementById("age");
 const heightInput = document.getElementById("height");
 const weightInput = document.getElementById("weight");
 const activityInput = document.getElementById("activity-level");
-
+const sexInput = document.getElementById("sex");
 
 // Get the area where we will display the result
 const profileResult = document.getElementById("profile-result");
@@ -177,7 +177,8 @@ profileForm.addEventListener("submit", function (event) {
     const activityLevel = activityInput.value;
 
     const goal = selectedGoal.value;
-
+    
+    const sex = sexInput.value;
 
     // ======================================
     // BASIC VALIDATION
@@ -225,19 +226,21 @@ profileForm.addEventListener("submit", function (event) {
 
     const userProfile = {
 
-        name: name,
+    name: name,
 
-        age: age,
+    age: age,
 
-        height: height,
+    height: height,
 
-        weight: weight,
+    weight: weight,
 
-        goal: goal,
+    sex: sex,
 
-        activityLevel: activityLevel
+    goal: goal,
 
-    };
+    activityLevel: activityLevel
+
+};
 
 
     // ======================================
