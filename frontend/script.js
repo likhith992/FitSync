@@ -8,25 +8,32 @@
 // ==========================================
 
 // Get the profile form
-const profileForm = document.getElementById("profile-form");
+const profileForm =
+    document.getElementById("profile-form");
 
 
 // Get the input elements
-const nameInput = document.getElementById("name");
+const nameInput =
+    document.getElementById("name");
 
-const ageInput = document.getElementById("age");
+const ageInput =
+    document.getElementById("age");
 
-const heightInput = document.getElementById("height");
+const heightInput =
+    document.getElementById("height");
 
-const weightInput = document.getElementById("weight");
+const weightInput =
+    document.getElementById("weight");
 
-const sexInput = document.getElementById("sex");
+const sexInput =
+    document.getElementById("sex");
 
 const activityInput =
     document.getElementById("activity-level");
 
 
-// Get the area where the result will be displayed
+// Get the area where the profile result
+// will be displayed
 const profileResult =
     document.getElementById("profile-result");
 
@@ -49,7 +56,6 @@ const fatTargetElement =
 
 const waterTargetElement =
     document.getElementById("water-target");
-
 
 
 // ==========================================
@@ -87,8 +93,8 @@ function calculateProtein(weight, goal) {
 
 
     return Math.round(weight * proteinPerKg);
-}
 
+}
 
 
 // ==========================================
@@ -97,7 +103,9 @@ function calculateProtein(weight, goal) {
 
 function calculateBMI(weight, height) {
 
-    const heightInMeters = height / 100;
+    const heightInMeters =
+        height / 100;
+
 
     const bmi =
         weight /
@@ -105,8 +113,8 @@ function calculateBMI(weight, height) {
 
 
     return Number(bmi.toFixed(2));
-}
 
+}
 
 
 // ==========================================
@@ -142,12 +150,16 @@ function getBMICategory(bmi) {
 }
 
 
-
 // ==========================================
 // BMR CALCULATION
 // ==========================================
 
-function calculateBMR(weight, height, age, sex) {
+function calculateBMR(
+    weight,
+    height,
+    age,
+    sex
+) {
 
     let bmr;
 
@@ -174,15 +186,17 @@ function calculateBMR(weight, height, age, sex) {
 
 
     return Math.round(bmr);
-}
 
+}
 
 
 // ==========================================
 // ACTIVITY MULTIPLIER
 // ==========================================
 
-function getActivityMultiplier(activityLevel) {
+function getActivityMultiplier(
+    activityLevel
+) {
 
     if (activityLevel === "sedentary") {
 
@@ -210,8 +224,8 @@ function getActivityMultiplier(activityLevel) {
 
 
     return 1.2;
-}
 
+}
 
 
 // ==========================================
@@ -224,12 +238,15 @@ function calculateMaintenanceCalories(
 ) {
 
     const multiplier =
-        getActivityMultiplier(activityLevel);
+        getActivityMultiplier(
+            activityLevel
+        );
 
 
     return Math.round(
         bmr * multiplier
     );
+
 }
 
 
@@ -277,6 +294,7 @@ function calculateCalorieTarget(
 
 
     return maintenanceCalories + adjustment;
+
 }
 
 
@@ -289,28 +307,41 @@ function calculateNutritionTargets(
     proteinTarget
 ) {
 
+    // Protein provides approximately
+    // 4 calories per gram
     const proteinCalories =
         proteinTarget * 4;
 
 
+    // Calories remaining after protein
     const remainingCalories =
-        calorieTarget - proteinCalories;
+        calorieTarget -
+        proteinCalories;
 
 
+    // For this learning version,
+    // 60% of remaining calories
+    // are allocated to carbohydrates
     const carbohydrateCalories =
         remainingCalories * 0.60;
 
 
+    // 40% of remaining calories
+    // are allocated to fat
     const fatCalories =
         remainingCalories * 0.40;
 
 
+    // Carbohydrates provide
+    // approximately 4 calories per gram
     const carbohydrates =
         Math.round(
             carbohydrateCalories / 4
         );
 
 
+    // Fat provides approximately
+    // 9 calories per gram
     const fat =
         Math.round(
             fatCalories / 9
@@ -415,7 +446,6 @@ function getGoalMessages(goal) {
 }
 
 
-
 // ==========================================
 // PROFILE FORM SUBMISSION
 // ==========================================
@@ -424,10 +454,8 @@ profileForm.addEventListener(
     "submit",
     function (event) {
 
-
         // Prevent page refresh
         event.preventDefault();
-
 
 
         // ======================================
@@ -438,7 +466,6 @@ profileForm.addEventListener(
             document.querySelector(
                 'input[name="goal"]:checked'
             );
-
 
 
         // ======================================
@@ -453,7 +480,6 @@ profileForm.addEventListener(
             return;
 
         }
-
 
 
         // ======================================
@@ -486,7 +512,6 @@ profileForm.addEventListener(
 
         const goal =
             selectedGoal.value;
-
 
 
         // ======================================
@@ -543,7 +568,6 @@ profileForm.addEventListener(
         }
 
 
-
         // ======================================
         // CREATE USER PROFILE
         // ======================================
@@ -567,7 +591,6 @@ profileForm.addEventListener(
         };
 
 
-
         // ======================================
         // CALCULATE PROTEIN
         // ======================================
@@ -577,7 +600,6 @@ profileForm.addEventListener(
                 userProfile.weight,
                 userProfile.goal
             );
-
 
 
         // ======================================
@@ -595,7 +617,6 @@ profileForm.addEventListener(
             getBMICategory(bmi);
 
 
-
         // ======================================
         // CALCULATE BMR
         // ======================================
@@ -609,7 +630,6 @@ profileForm.addEventListener(
             );
 
 
-
         // ======================================
         // CALCULATE MAINTENANCE CALORIES
         // ======================================
@@ -621,18 +641,15 @@ profileForm.addEventListener(
             );
 
 
-
         // ======================================
         // CALCULATE GOAL-BASED CALORIE TARGET
         // ======================================
-    
 
         const calorieTarget =
             calculateCalorieTarget(
-               maintenanceCalories,
-               userProfile.goal
+                maintenanceCalories,
+                userProfile.goal
             );
-
 
 
         // ======================================
@@ -640,10 +657,11 @@ profileForm.addEventListener(
         // ======================================
 
         const nutritionTargets =
-        calculateNutritionTargets(
-        calorieTarget,
-        proteinTarget
+            calculateNutritionTargets(
+                calorieTarget,
+                proteinTarget
             );
+
 
         // ======================================
         // CREATE FITNESS DATA OBJECT
@@ -665,8 +683,37 @@ profileForm.addEventListener(
 
             nutritionTargets:
                 nutritionTargets
+
         };
 
+
+        // ======================================
+        // UPDATE DAILY NUTRITION
+        // ======================================
+
+        calorieTargetElement.textContent =
+            nutritionTargets.calories +
+            " kcal";
+
+
+        proteinTargetElement.textContent =
+            nutritionTargets.protein +
+            " g";
+
+
+        carbohydrateTargetElement.textContent =
+            nutritionTargets.carbohydrates +
+            " g";
+
+
+        fatTargetElement.textContent =
+            nutritionTargets.fat +
+            " g";
+
+
+        waterTargetElement.textContent =
+            nutritionTargets.water +
+            " litres";
 
 
         // ======================================
@@ -679,7 +726,6 @@ profileForm.addEventListener(
             );
 
 
-
         // ======================================
         // DISPLAY PROFILE RESULT
         // ======================================
@@ -688,54 +734,48 @@ profileForm.addEventListener(
 
             <h3>FitSync Profile Created</h3>
 
-
             <p>
                 Welcome,
-                <strong>${userProfile.name}</strong>!
+                <strong>
+                    ${userProfile.name}
+                </strong>!
             </p>
-
 
             <p>
                 <strong>Age:</strong>
                 ${userProfile.age}
             </p>
 
-
             <p>
                 <strong>Height:</strong>
                 ${userProfile.height} cm
             </p>
-
 
             <p>
                 <strong>Weight:</strong>
                 ${userProfile.weight} kg
             </p>
 
-
             <p>
                 <strong>Sex:</strong>
                 ${userProfile.sex}
             </p>
-
 
             <p>
                 <strong>BMI:</strong>
                 ${fitnessData.bmi}
             </p>
 
-
             <p>
                 <strong>BMI Category:</strong>
                 ${fitnessData.bmiCategory}
             </p>
 
-
             <p>
                 <strong>BMR:</strong>
-                ${fitnessData.bmr} kcal/day
+                ${fitnessData.bmr}
+                kcal/day
             </p>
-
 
             <p>
                 <strong>
@@ -745,7 +785,6 @@ profileForm.addEventListener(
                 ${fitnessData.maintenanceCalories}
                 kcal/day
             </p>
-
 
             <p>
                 <strong>
@@ -757,32 +796,35 @@ profileForm.addEventListener(
             </p>
 
             <p>
-                <strong>Fitness Goal:</strong>
+                <strong>
+                    Fitness Goal:
+                </strong>
+
                 ${goalInformation.title}
             </p>
 
-
             <p>
-                <strong>Activity Level:</strong>
+                <strong>
+                    Activity Level:
+                </strong>
+
                 ${userProfile.activityLevel}
             </p>
-
 
             <p>
                 <strong>
                     Estimated Protein Target:
                 </strong>
 
-                ${proteinTarget} g/day
+                ${proteinTarget}
+                g/day
             </p>
-
 
             <p>
                 ${goalInformation.message}
             </p>
 
         `;
-
 
 
         // ======================================
