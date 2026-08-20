@@ -12,7 +12,10 @@
 
     <title>FitSync</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
@@ -20,9 +23,9 @@
 <body>
 
 
-    <!-- =========================
-         HEADER
-    ========================== -->
+    <!-- ==========================================
+         FITSYNC HEADER
+    =========================================== -->
 
     <header>
 
@@ -44,14 +47,18 @@
 
 
 
+    <!-- ==========================================
+         MAIN CONTENT
+    =========================================== -->
+
     <main>
 
         <div class="dashboard">
 
 
-            <!-- =========================
+            <!-- ======================================
                  WELCOME SECTION
-            ========================== -->
+            ======================================= -->
 
             <section class="fitsync-section">
 
@@ -66,13 +73,15 @@
 
 
 
-            <!-- =========================
+            <!-- ======================================
                  FITSYNC PROFILE
-            ========================== -->
+            ======================================= -->
 
             <section class="fitsync-section">
 
-                <h2>Create Your FitSync Profile</h2>
+                <h2>
+                    Create Your FitSync Profile
+                </h2>
 
 
                 <form id="profile-form">
@@ -94,8 +103,8 @@
                         required
                     >
 
-
                     <br><br>
+
 
 
                     <!-- AGE -->
@@ -114,8 +123,8 @@
                         required
                     >
 
-
                     <br><br>
+
 
 
                     <!-- HEIGHT -->
@@ -134,8 +143,8 @@
                         required
                     >
 
-
                     <br><br>
+
 
 
                     <!-- WEIGHT -->
@@ -154,8 +163,8 @@
                         required
                     >
 
-
                     <br><br>
+
 
 
                     <!-- SEX -->
@@ -186,13 +195,15 @@
 
                     </select>
 
-
                     <br><br>
+
 
 
                     <!-- FITNESS GOAL -->
 
-                    <h3>Fitness Goal</h3>
+                    <h3>
+                        Fitness Goal
+                    </h3>
 
 
                     <input
@@ -206,7 +217,6 @@
                     <label for="lose-weight">
                         Lose Weight
                     </label>
-
 
                     <br>
 
@@ -222,7 +232,6 @@
                         Maintain Weight
                     </label>
 
-
                     <br>
 
 
@@ -236,7 +245,6 @@
                     <label for="build-muscle">
                         Build Muscle
                     </label>
-
 
                     <br>
 
@@ -252,8 +260,8 @@
                         Gain Weight
                     </label>
 
-
                     <br><br>
+
 
 
                     <!-- ACTIVITY LEVEL -->
@@ -288,18 +296,21 @@
 
                     </select>
 
-
                     <br><br>
 
+
+
+                    <!-- SUBMIT -->
 
                     <button type="submit">
                         Create Profile
                     </button>
 
+
                 </form>
 
 
-                <!-- JavaScript will display the profile here -->
+                <!-- PROFILE RESULT -->
 
                 <div id="profile-result"></div>
 
@@ -308,13 +319,15 @@
 
 
 
-            <!-- =========================
+            <!-- ======================================
                  WORKOUT PLANNER
-            ========================== -->
+            ======================================= -->
 
             <section class="fitsync-section workout-section">
 
-                <h2>FitSync Workout Planner</h2>
+                <h2>
+                    FitSync Workout Planner
+                </h2>
 
                 <p>
                     Select a day and workout type
@@ -325,6 +338,8 @@
                 <form id="workout-form">
 
 
+                    <!-- WORKOUT DAY -->
+
                     <label for="workout-day">
                         Select Day
                     </label>
@@ -334,6 +349,7 @@
                     <select
                         id="workout-day"
                         name="workout-day"
+                        required
                     >
 
                         <option value="monday">
@@ -366,9 +382,11 @@
 
                     </select>
 
-
                     <br><br>
 
+
+
+                    <!-- WORKOUT TYPE -->
 
                     <label for="workout-type">
                         Workout Type
@@ -379,6 +397,7 @@
                     <select
                         id="workout-type"
                         name="workout-type"
+                        required
                     >
 
                         <option value="strength">
@@ -399,16 +418,19 @@
 
                     </select>
 
-
                     <br><br>
+
 
 
                     <button type="submit">
                         Show Workout
                     </button>
 
+
                 </form>
 
+
+                <!-- WORKOUT RESULT -->
 
                 <div id="workout-result"></div>
 
@@ -417,22 +439,27 @@
 
 
 
-            <!-- =========================
+            <!-- ======================================
                  DIET PLANNER
-            ========================== -->
+            ======================================= -->
 
             <section class="fitsync-section">
 
-                <h2>FitSync Diet Planner</h2>
+                <h2>
+                    FitSync Diet Planner
+                </h2>
 
                 <p>
-                    Select your fitness goal to receive
-                    suitable diet recommendations.
+                    Select your fitness goal and
+                    diet preference to receive
+                    a personalized recommendation.
                 </p>
 
 
                 <form id="diet-form">
 
+
+                    <!-- DIET GOAL -->
 
                     <label for="diet-goal">
                         Fitness Goal
@@ -443,6 +470,7 @@
                     <select
                         id="diet-goal"
                         name="diet-goal"
+                        required
                     >
 
                         <option value="Lose Weight">
@@ -463,9 +491,11 @@
 
                     </select>
 
-
                     <br><br>
 
+
+
+                    <!-- DIET PREFERENCE -->
 
                     <label for="diet-preference">
                         Diet Preference
@@ -476,6 +506,7 @@
                     <select
                         id="diet-preference"
                         name="diet-preference"
+                        required
                     >
 
                         <option value="vegetarian">
@@ -492,16 +523,21 @@
 
                     </select>
 
-
                     <br><br>
 
+
+
+                    <!-- SUBMIT -->
 
                     <button type="submit">
                         Get Diet Recommendation
                     </button>
 
+
                 </form>
 
+
+                <!-- DIET RESULT -->
 
                 <div id="diet-result"></div>
 
@@ -510,15 +546,19 @@
 
 
 
-            <!-- =========================
+            <!-- ======================================
                  TODAY'S WORKOUT
-            ========================== -->
+            ======================================= -->
 
             <section class="fitsync-section">
 
-                <h2>Today's Workout</h2>
+                <h2>
+                    Today's Workout
+                </h2>
 
-                <h3>Chest &amp; Triceps</h3>
+                <h3>
+                    Chest & Triceps
+                </h3>
 
 
                 <table>
@@ -527,11 +567,17 @@
 
                         <tr>
 
-                            <th>Exercise</th>
+                            <th>
+                                Exercise
+                            </th>
 
-                            <th>Sets</th>
+                            <th>
+                                Sets
+                            </th>
 
-                            <th>Reps</th>
+                            <th>
+                                Reps
+                            </th>
 
                         </tr>
 
@@ -542,44 +588,68 @@
 
                         <tr>
 
-                            <td>Bench Press</td>
+                            <td>
+                                Bench Press
+                            </td>
 
-                            <td>4</td>
+                            <td>
+                                4
+                            </td>
 
-                            <td>8</td>
-
-                        </tr>
-
-
-                        <tr>
-
-                            <td>Incline Dumbbell Press</td>
-
-                            <td>3</td>
-
-                            <td>10</td>
+                            <td>
+                                8
+                            </td>
 
                         </tr>
 
 
                         <tr>
 
-                            <td>Push Ups</td>
+                            <td>
+                                Incline Dumbbell Press
+                            </td>
 
-                            <td>3</td>
+                            <td>
+                                3
+                            </td>
 
-                            <td>12</td>
+                            <td>
+                                10
+                            </td>
 
                         </tr>
 
 
                         <tr>
 
-                            <td>Tricep Pushdown</td>
+                            <td>
+                                Push Ups
+                            </td>
 
-                            <td>3</td>
+                            <td>
+                                3
+                            </td>
 
-                            <td>12</td>
+                            <td>
+                                12
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Tricep Pushdown
+                            </td>
+
+                            <td>
+                                3
+                            </td>
+
+                            <td>
+                                12
+                            </td>
 
                         </tr>
 
@@ -592,26 +662,36 @@
 
 
 
-            <!-- =========================
+            <!-- ======================================
                  MEAL PLAN
-            ========================== -->
+            ======================================= -->
 
             <section class="fitsync-section">
 
-                <h2>Today's FitSync Meal Plan</h2>
+                <h2>
+                    Today's FitSync Meal Plan
+                </h2>
 
 
                 <article>
 
-                    <h3>Breakfast</h3>
+                    <h3>
+                        Breakfast
+                    </h3>
 
                     <ul>
 
-                        <li>Oats</li>
+                        <li>
+                            Oats
+                        </li>
 
-                        <li>Eggs</li>
+                        <li>
+                            Eggs
+                        </li>
 
-                        <li>Banana</li>
+                        <li>
+                            Banana
+                        </li>
 
                     </ul>
 
@@ -620,15 +700,23 @@
 
                 <article>
 
-                    <h3>Lunch</h3>
+                    <h3>
+                        Lunch
+                    </h3>
 
                     <ul>
 
-                        <li>Rice</li>
+                        <li>
+                            Rice
+                        </li>
 
-                        <li>Chicken</li>
+                        <li>
+                            Chicken
+                        </li>
 
-                        <li>Vegetables</li>
+                        <li>
+                            Vegetables
+                        </li>
 
                     </ul>
 
@@ -637,13 +725,19 @@
 
                 <article>
 
-                    <h3>Snack</h3>
+                    <h3>
+                        Snack
+                    </h3>
 
                     <ul>
 
-                        <li>Fruits</li>
+                        <li>
+                            Fruits
+                        </li>
 
-                        <li>Nuts</li>
+                        <li>
+                            Nuts
+                        </li>
 
                     </ul>
 
@@ -652,15 +746,23 @@
 
                 <article>
 
-                    <h3>Dinner</h3>
+                    <h3>
+                        Dinner
+                    </h3>
 
                     <ul>
 
-                        <li>Chapati</li>
+                        <li>
+                            Chapati
+                        </li>
 
-                        <li>Paneer</li>
+                        <li>
+                            Paneer
+                        </li>
 
-                        <li>Salad</li>
+                        <li>
+                            Salad
+                        </li>
 
                     </ul>
 
@@ -671,103 +773,124 @@
 
 
 
-           <!-- =========================
-                DAILY NUTRITION
-           ========================== -->
-
-<section class="fitsync-section">
-
-    <h2>FitSync Daily Nutrition</h2>
-
-    <p>
-        Your recommended daily nutrition targets.
-    </p>
-
-
-    <table>
-
-        <thead>
-
-            <tr>
-
-                <th>Nutrient</th>
-
-                <th>Daily Target</th>
-
-            </tr>
-
-        </thead>
-
-
-        <tbody>
-
-            <tr>
-
-                <td>Calories</td>
-
-                <td id="calorie-target">
-                    Not calculated yet
-                </td>
-
-            </tr>
-
-
-            <tr>
-
-                <td>Protein</td>
-
-                <td id="protein-target">
-                    Not calculated yet
-                </td>
-
-            </tr>
-
-
-            <tr>
-
-                <td>Carbohydrates</td>
-
-                <td id="carbohydrate-target">
-                    Not calculated yet
-                </td>
-
-            </tr>
-
-
-            <tr>
-
-                <td>Fat</td>
-
-                <td id="fat-target">
-                    Not calculated yet
-                </td>
-
-            </tr>
-
-
-            <tr>
-
-                <td>Water</td>
-
-                <td id="water-target">
-                    Not calculated yet
-                </td>
-
-            </tr>
-
-        </tbody>
-
-    </table>
-
-</section>
-
-            <!-- =========================
-                 PROGRESS TRACKER
-            ========================== -->
+            <!-- ======================================
+                 DAILY NUTRITION
+            ======================================= -->
 
             <section class="fitsync-section">
 
-                <h2>FitSync Progress Tracker</h2>
+                <h2>
+                    FitSync Daily Nutrition
+                </h2>
+
+                <p>
+                    Your recommended daily nutrition targets.
+                </p>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Nutrient
+                            </th>
+
+                            <th>
+                                Daily Target
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                Calories
+                            </td>
+
+                            <td id="calorie-target">
+                                2500 kcal
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Protein
+                            </td>
+
+                            <td id="protein-target">
+                                140 g
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Carbohydrates
+                            </td>
+
+                            <td id="carbohydrate-target">
+                                300 g
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Fat
+                            </td>
+
+                            <td id="fat-target">
+                                70 g
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Water
+                            </td>
+
+                            <td id="water-target">
+                                3 litres
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+
+            </section>
+
+
+
+            <!-- ======================================
+                 PROGRESS TRACKER
+            ======================================= -->
+
+            <section class="fitsync-section">
+
+                <h2>
+                    FitSync Progress Tracker
+                </h2>
 
 
                 <form id="progress-form">
@@ -788,8 +911,8 @@
                         required
                     >
 
-
                     <br><br>
+
 
 
                     <label for="progress-date">
@@ -805,13 +928,14 @@
                         required
                     >
 
-
                     <br><br>
+
 
 
                     <button type="submit">
                         Save Progress
                     </button>
+
 
                 </form>
 
@@ -823,18 +947,22 @@
 
 
 
-            <!-- =========================
+            <!-- ======================================
                  WEIGHT MANAGEMENT GUIDE
-            ========================== -->
+            ======================================= -->
 
             <section class="fitsync-section">
 
-                <h2>FitSync Weight Management Guide</h2>
+                <h2>
+                    FitSync Weight Management Guide
+                </h2>
 
 
                 <article>
 
-                    <h3>Building Muscle</h3>
+                    <h3>
+                        Building Muscle
+                    </h3>
 
                     <ul>
 
@@ -861,7 +989,9 @@
 
                 <article>
 
-                    <h3>Fat Loss</h3>
+                    <h3>
+                        Fat Loss
+                    </h3>
 
                     <ul>
 
@@ -888,7 +1018,9 @@
 
                 <article>
 
-                    <h3>Healthy Weight Gain</h3>
+                    <h3>
+                        Healthy Weight Gain
+                    </h3>
 
                     <ul>
 
@@ -922,9 +1054,9 @@
 
 
 
-    <!-- =========================
+    <!-- ==========================================
          FOOTER
-    ========================== -->
+    =========================================== -->
 
     <footer>
 
@@ -933,6 +1065,7 @@
         </p>
 
     </footer>
+
 
 
     <script src="script.js"></script>
