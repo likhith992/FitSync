@@ -559,7 +559,7 @@ profileForm.addEventListener(
                userProfile.goal
             );
 
-            
+
 
         // ======================================
         // CREATE FITNESS DATA OBJECT
@@ -574,7 +574,10 @@ profileForm.addEventListener(
             bmr: bmr,
 
             maintenanceCalories:
-                maintenanceCalories
+                maintenanceCalories,
+
+            calorieTarget:
+                calorieTarget   
 
         };
 
@@ -657,6 +660,15 @@ profileForm.addEventListener(
                 kcal/day
             </p>
 
+
+            <p>
+                <strong>
+                    FitSync Calorie Target:
+                </strong>
+
+                ${fitnessData.calorieTarget}
+                kcal/day
+            </p>
 
             <p>
                 <strong>Fitness Goal:</strong>
