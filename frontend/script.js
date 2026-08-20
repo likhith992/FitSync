@@ -213,6 +213,52 @@ function calculateMaintenanceCalories(
 }
 
 
+// ==========================================
+// GOAL-BASED CALORIE TARGET
+// ==========================================
+
+function calculateCalorieTarget(
+    maintenanceCalories,
+    goal
+) {
+
+    let adjustment;
+
+
+    if (goal === "Lose Weight") {
+
+        adjustment = -300;
+
+    }
+
+    else if (goal === "Maintain Weight") {
+
+        adjustment = 0;
+
+    }
+
+    else if (goal === "Build Muscle") {
+
+        adjustment = 250;
+
+    }
+
+    else if (goal === "Gain Weight") {
+
+        adjustment = 300;
+
+    }
+
+    else {
+
+        adjustment = 0;
+
+    }
+
+
+    return maintenanceCalories + adjustment;
+}
+
 
 // ==========================================
 // FITNESS GOAL MESSAGES
@@ -501,6 +547,19 @@ profileForm.addEventListener(
             );
 
 
+
+        // ======================================
+        // CALCULATE GOAL-BASED CALORIE TARGET
+        // ======================================
+    
+
+        const calorieTarget =
+            calculateCalorieTarget(
+               maintenanceCalories,
+               userProfile.goal
+            );
+
+            
 
         // ======================================
         // CREATE FITNESS DATA OBJECT
