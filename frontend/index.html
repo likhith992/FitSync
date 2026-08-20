@@ -2,30 +2,46 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>FitSync</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
+
 <body>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
 
     <header>
 
         <h1>FitSync</h1>
 
         <nav>
+
             <a href="#">Home</a>
+
             <a href="#">Workout</a>
+
             <a href="#">Diet</a>
+
             <a href="#">Progress</a>
+
         </nav>
 
     </header>
+
 
 
     <main>
@@ -49,6 +65,7 @@
             </section>
 
 
+
             <!-- =========================
                  FITSYNC PROFILE
             ========================== -->
@@ -57,9 +74,16 @@
 
                 <h2>Create Your FitSync Profile</h2>
 
+
                 <form id="profile-form">
 
-                    <label for="name">Name</label>
+
+                    <!-- NAME -->
+
+                    <label for="name">
+                        Name
+                    </label>
+
                     <br>
 
                     <input
@@ -70,10 +94,16 @@
                         required
                     >
 
+
                     <br><br>
 
 
-                    <label for="age">Age</label>
+                    <!-- AGE -->
+
+                    <label for="age">
+                        Age
+                    </label>
+
                     <br>
 
                     <input
@@ -84,10 +114,16 @@
                         required
                     >
 
+
                     <br><br>
 
 
-                    <label for="height">Height (cm)</label>
+                    <!-- HEIGHT -->
+
+                    <label for="height">
+                        Height (cm)
+                    </label>
+
                     <br>
 
                     <input
@@ -98,10 +134,16 @@
                         required
                     >
 
+
                     <br><br>
 
 
-                    <label for="weight">Weight (kg)</label>
+                    <!-- WEIGHT -->
+
+                    <label for="weight">
+                        Weight (kg)
+                    </label>
+
                     <br>
 
                     <input
@@ -112,26 +154,43 @@
                         required
                     >
 
+
                     <br><br>
-                    
-                    <label for="sex">Sex</label>
+
+
+                    <!-- SEX -->
+
+                    <label for="sex">
+                        Sex
+                    </label>
+
                     <br>
 
-                    <select id="sex" name="sex" required>
+                    <select
+                        id="sex"
+                        name="sex"
+                        required
+                    >
 
-                     <option value="">Select</option>
+                        <option value="">
+                            Select
+                        </option>
 
-                     <option value="male"> 
-                      Male
-                     </option>
+                        <option value="male">
+                            Male
+                        </option>
 
-                     <option value="female">
-                      Female
-                     </option>
+                        <option value="female">
+                            Female
+                        </option>
 
                     </select>
 
+
                     <br><br>
+
+
+                    <!-- FITNESS GOAL -->
 
                     <h3>Fitness Goal</h3>
 
@@ -148,6 +207,7 @@
                         Lose Weight
                     </label>
 
+
                     <br>
 
 
@@ -161,6 +221,7 @@
                     <label for="maintain-weight">
                         Maintain Weight
                     </label>
+
 
                     <br>
 
@@ -176,6 +237,7 @@
                         Build Muscle
                     </label>
 
+
                     <br>
 
 
@@ -190,8 +252,11 @@
                         Gain Weight
                     </label>
 
+
                     <br><br>
 
+
+                    <!-- ACTIVITY LEVEL -->
 
                     <label for="activity-level">
                         Activity Level
@@ -223,6 +288,7 @@
 
                     </select>
 
+
                     <br><br>
 
 
@@ -233,9 +299,10 @@
                 </form>
 
 
-                <!-- JavaScript will display profile results here -->
+                <!-- JavaScript will display the profile here -->
 
                 <div id="profile-result"></div>
+
 
             </section>
 
@@ -257,6 +324,7 @@
 
                 <form id="workout-form">
 
+
                     <label for="workout-day">
                         Select Day
                     </label>
@@ -266,7 +334,6 @@
                     <select
                         id="workout-day"
                         name="workout-day"
-                        required
                     >
 
                         <option value="monday">
@@ -299,6 +366,7 @@
 
                     </select>
 
+
                     <br><br>
 
 
@@ -311,7 +379,6 @@
                     <select
                         id="workout-type"
                         name="workout-type"
-                        required
                     >
 
                         <option value="strength">
@@ -332,6 +399,7 @@
 
                     </select>
 
+
                     <br><br>
 
 
@@ -342,9 +410,8 @@
                 </form>
 
 
-                <!-- JavaScript workout results -->
-
                 <div id="workout-result"></div>
+
 
             </section>
 
@@ -366,6 +433,7 @@
 
                 <form id="diet-form">
 
+
                     <label for="diet-goal">
                         Fitness Goal
                     </label>
@@ -375,7 +443,6 @@
                     <select
                         id="diet-goal"
                         name="diet-goal"
-                        required
                     >
 
                         <option value="Lose Weight">
@@ -396,6 +463,7 @@
 
                     </select>
 
+
                     <br><br>
 
 
@@ -408,7 +476,6 @@
                     <select
                         id="diet-preference"
                         name="diet-preference"
-                        required
                     >
 
                         <option value="vegetarian">
@@ -425,6 +492,7 @@
 
                     </select>
 
+
                     <br><br>
 
 
@@ -435,9 +503,8 @@
                 </form>
 
 
-                <!-- JavaScript diet results -->
-
                 <div id="diet-result"></div>
+
 
             </section>
 
@@ -451,16 +518,21 @@
 
                 <h2>Today's Workout</h2>
 
-                <h3>Chest & Triceps</h3>
+                <h3>Chest &amp; Triceps</h3>
+
 
                 <table>
 
                     <thead>
 
                         <tr>
+
                             <th>Exercise</th>
+
                             <th>Sets</th>
+
                             <th>Reps</th>
+
                         </tr>
 
                     </thead>
@@ -469,32 +541,52 @@
                     <tbody>
 
                         <tr>
+
                             <td>Bench Press</td>
+
                             <td>4</td>
+
                             <td>8</td>
+
                         </tr>
 
+
                         <tr>
+
                             <td>Incline Dumbbell Press</td>
+
                             <td>3</td>
+
                             <td>10</td>
+
                         </tr>
 
+
                         <tr>
+
                             <td>Push Ups</td>
+
                             <td>3</td>
+
                             <td>12</td>
+
                         </tr>
 
+
                         <tr>
+
                             <td>Tricep Pushdown</td>
+
                             <td>3</td>
+
                             <td>12</td>
+
                         </tr>
 
                     </tbody>
 
                 </table>
+
 
             </section>
 
@@ -514,9 +606,13 @@
                     <h3>Breakfast</h3>
 
                     <ul>
+
                         <li>Oats</li>
+
                         <li>Eggs</li>
+
                         <li>Banana</li>
+
                     </ul>
 
                 </article>
@@ -527,9 +623,13 @@
                     <h3>Lunch</h3>
 
                     <ul>
+
                         <li>Rice</li>
+
                         <li>Chicken</li>
+
                         <li>Vegetables</li>
+
                     </ul>
 
                 </article>
@@ -540,8 +640,11 @@
                     <h3>Snack</h3>
 
                     <ul>
+
                         <li>Fruits</li>
+
                         <li>Nuts</li>
+
                     </ul>
 
                 </article>
@@ -552,12 +655,17 @@
                     <h3>Dinner</h3>
 
                     <ul>
+
                         <li>Chapati</li>
+
                         <li>Paneer</li>
+
                         <li>Salad</li>
+
                     </ul>
 
                 </article>
+
 
             </section>
 
@@ -581,8 +689,11 @@
                     <thead>
 
                         <tr>
+
                             <th>Nutrient</th>
+
                             <th>Daily Target</th>
+
                         </tr>
 
                     </thead>
@@ -591,33 +702,53 @@
                     <tbody>
 
                         <tr>
+
                             <td>Calories</td>
+
                             <td>2500 kcal</td>
+
                         </tr>
 
+
                         <tr>
+
                             <td>Protein</td>
+
                             <td>140 g</td>
+
                         </tr>
 
+
                         <tr>
+
                             <td>Carbohydrates</td>
+
                             <td>300 g</td>
+
                         </tr>
 
+
                         <tr>
+
                             <td>Fat</td>
+
                             <td>70 g</td>
+
                         </tr>
 
+
                         <tr>
+
                             <td>Water</td>
+
                             <td>3 litres</td>
+
                         </tr>
 
                     </tbody>
 
                 </table>
+
 
             </section>
 
@@ -634,6 +765,7 @@
 
                 <form id="progress-form">
 
+
                     <label for="progress-weight">
                         Today's Weight (kg)
                     </label>
@@ -648,6 +780,7 @@
                         placeholder="Enter your weight"
                         required
                     >
+
 
                     <br><br>
 
@@ -665,6 +798,7 @@
                         required
                     >
 
+
                     <br><br>
 
 
@@ -675,9 +809,8 @@
                 </form>
 
 
-                <!-- JavaScript progress results -->
-
                 <div id="progress-result"></div>
+
 
             </section>
 
@@ -772,6 +905,7 @@
 
                 </article>
 
+
             </section>
 
 
@@ -781,9 +915,15 @@
 
 
 
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
     <footer>
 
-        <p>FitSync © 2026</p>
+        <p>
+            FitSync © 2026
+        </p>
 
     </footer>
 
