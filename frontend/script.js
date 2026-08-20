@@ -79,8 +79,21 @@ const dietForm =
 const dietGoal =
     document.getElementById("diet-goal");
 
+const dietPreference =
+    document.getElementById("diet-preference");
+
 const dietResult =
     document.getElementById("diet-result");
+
+
+// ==========================================
+// CURRENT FITSYNC FITNESS DATA
+// ==========================================
+
+// This variable stores the latest calculated
+// profile and nutrition information.
+
+let currentFitnessData = null;
 
 
 // ==========================================
@@ -88,6 +101,7 @@ const dietResult =
 // ==========================================
 
 const workoutData = {
+
 
     // ======================================
     // STRENGTH TRAINING
@@ -127,6 +141,7 @@ const workoutData = {
 
         ],
 
+
         wednesday: [
 
             {
@@ -158,6 +173,7 @@ const workoutData = {
             }
 
         ],
+
 
         friday: [
 
@@ -218,6 +234,7 @@ const workoutData = {
 
         ],
 
+
         wednesday: [
 
             {
@@ -235,6 +252,7 @@ const workoutData = {
             }
 
         ],
+
 
         friday: [
 
@@ -294,6 +312,7 @@ const workoutData = {
             }
 
         ],
+
 
         thursday: [
 
@@ -361,6 +380,7 @@ const workoutData = {
 
         ],
 
+
         thursday: [
 
             {
@@ -394,143 +414,502 @@ const workoutData = {
 // ==========================================
 // FITSYNC DIET DATA
 // ==========================================
+//
+// Structure:
+//
+// dietData
+//     ↓
+// Goal
+//     ↓
+// Diet Preference
+//     ↓
+// Meals
+//
+// ==========================================
 
 const dietData = {
 
-    "lose-weight": {
 
-        title: "FitSync Fat Loss Plan",
+    // ======================================
+    // LOSE WEIGHT
+    // ======================================
 
-        meals: [
+    "Lose Weight": {
 
-            {
-                meal: "Breakfast",
-                food: "Oats with Greek yogurt and berries"
-            },
 
-            {
-                meal: "Lunch",
-                food: "Grilled chicken, brown rice and vegetables"
-            },
+        // ==================================
+        // VEGETARIAN
+        // ==================================
 
-            {
-                meal: "Snack",
-                food: "Greek yogurt with fruit"
-            },
+        vegetarian: {
 
-            {
-                meal: "Dinner",
-                food: "Grilled fish with vegetables and salad"
-            }
+            title:
+                "FitSync Fat Loss - Vegetarian",
 
-        ]
+            meals: [
+
+                {
+                    meal: "Breakfast",
+                    food:
+                        "Oats with Greek yogurt, berries and chia seeds"
+                },
+
+                {
+                    meal: "Lunch",
+                    food:
+                        "Brown rice, dal, mixed vegetables and curd"
+                },
+
+                {
+                    meal: "Snack",
+                    food:
+                        "Greek yogurt with fruit"
+                },
+
+                {
+                    meal: "Dinner",
+                    food:
+                        "Paneer with vegetables and salad"
+                }
+
+            ]
+
+        },
+
+
+        // ==================================
+        // NON-VEGETARIAN
+        // ==================================
+
+        "non-vegetarian": {
+
+            title:
+                "FitSync Fat Loss - Non-Vegetarian",
+
+            meals: [
+
+                {
+                    meal: "Breakfast",
+                    food:
+                        "Oats with eggs and berries"
+                },
+
+                {
+                    meal: "Lunch",
+                    food:
+                        "Grilled chicken, brown rice and vegetables"
+                },
+
+                {
+                    meal: "Snack",
+                    food:
+                        "Greek yogurt with fruit"
+                },
+
+                {
+                    meal: "Dinner",
+                    food:
+                        "Grilled fish with vegetables and salad"
+                }
+
+            ]
+
+        },
+
+
+        // ==================================
+        // VEGAN
+        // ==================================
+
+        vegan: {
+
+            title:
+                "FitSync Fat Loss - Vegan",
+
+            meals: [
+
+                {
+                    meal: "Breakfast",
+                    food:
+                        "Oats with soy milk, banana and berries"
+                },
+
+                {
+                    meal: "Lunch",
+                    food:
+                        "Brown rice, lentils and mixed vegetables"
+                },
+
+                {
+                    meal: "Snack",
+                    food:
+                        "Fruit with nuts"
+                },
+
+                {
+                    meal: "Dinner",
+                    food:
+                        "Tofu with vegetables and salad"
+                }
+
+            ]
+
+        }
 
     },
 
 
-    "maintain-weight": {
+    // ======================================
+    // MAINTAIN WEIGHT
+    // ======================================
 
-        title: "FitSync Weight Maintenance Plan",
+    "Maintain Weight": {
 
-        meals: [
 
-            {
-                meal: "Breakfast",
-                food: "Oatmeal with milk, banana and nuts"
-            },
+        vegetarian: {
 
-            {
-                meal: "Lunch",
-                food: "Chicken, rice and mixed vegetables"
-            },
+            title:
+                "FitSync Weight Maintenance - Vegetarian",
 
-            {
-                meal: "Snack",
-                food: "Fruit with yogurt"
-            },
+            meals: [
 
-            {
-                meal: "Dinner",
-                food: "Fish or lean chicken with rice and vegetables"
-            }
+                {
+                    meal: "Breakfast",
+                    food:
+                        "Oatmeal with milk, banana and nuts"
+                },
 
-        ]
+                {
+                    meal: "Lunch",
+                    food:
+                        "Rice, dal, paneer and vegetables"
+                },
+
+                {
+                    meal: "Snack",
+                    food:
+                        "Fruit with yogurt"
+                },
+
+                {
+                    meal: "Dinner",
+                    food:
+                        "Paneer, chapati and vegetables"
+                }
+
+            ]
+
+        },
+
+
+        "non-vegetarian": {
+
+            title:
+                "FitSync Weight Maintenance - Non-Vegetarian",
+
+            meals: [
+
+                {
+                    meal: "Breakfast",
+                    food:
+                        "Oatmeal with eggs, banana and milk"
+                },
+
+                {
+                    meal: "Lunch",
+                    food:
+                        "Chicken, rice and mixed vegetables"
+                },
+
+                {
+                    meal: "Snack",
+                    food:
+                        "Fruit with yogurt"
+                },
+
+                {
+                    meal: "Dinner",
+                    food:
+                        "Fish or lean chicken with rice and vegetables"
+                }
+
+            ]
+
+        },
+
+
+        vegan: {
+
+            title:
+                "FitSync Weight Maintenance - Vegan",
+
+            meals: [
+
+                {
+                    meal: "Breakfast",
+                    food:
+                        "Oatmeal with soy milk, banana and nuts"
+                },
+
+                {
+                    meal: "Lunch",
+                    food:
+                        "Rice, lentils, tofu and vegetables"
+                },
+
+                {
+                    meal: "Snack",
+                    food:
+                        "Fruit and mixed nuts"
+                },
+
+                {
+                    meal: "Dinner",
+                    food:
+                        "Tofu, quinoa and vegetables"
+                }
+
+            ]
+
+        }
 
     },
 
 
-    "build-muscle": {
+    // ======================================
+    // BUILD MUSCLE
+    // ======================================
 
-        title: "FitSync Muscle Building Plan",
+    "Build Muscle": {
 
-        meals: [
 
-            {
-                meal: "Breakfast",
-                food: "Oats, eggs, banana and milk"
-            },
+        vegetarian: {
 
-            {
-                meal: "Lunch",
-                food: "Chicken, rice, vegetables and curd"
-            },
+            title:
+                "FitSync Muscle Building - Vegetarian",
 
-            {
-                meal: "Snack",
-                food: "Greek yogurt, banana and nuts"
-            },
+            meals: [
 
-            {
-                meal: "Dinner",
-                food: "Chicken or fish with rice, vegetables and curd"
-            }
+                {
+                    meal: "Breakfast",
+                    food:
+                        "Oats, eggs, banana, milk and peanut butter"
+                },
 
-        ]
+                {
+                    meal: "Lunch",
+                    food:
+                        "Rice, paneer, dal and vegetables"
+                },
+
+                {
+                    meal: "Snack",
+                    food:
+                        "Greek yogurt, banana and nuts"
+                },
+
+                {
+                    meal: "Dinner",
+                    food:
+                        "Paneer, chapati, curd and vegetables"
+                }
+
+            ]
+
+        },
+
+
+        "non-vegetarian": {
+
+            title:
+                "FitSync Muscle Building - Non-Vegetarian",
+
+            meals: [
+
+                {
+                    meal: "Breakfast",
+                    food:
+                        "Oats, eggs, banana, milk and peanut butter"
+                },
+
+                {
+                    meal: "Lunch",
+                    food:
+                        "Chicken, rice, vegetables and curd"
+                },
+
+                {
+                    meal: "Snack",
+                    food:
+                        "Greek yogurt, banana and nuts"
+                },
+
+                {
+                    meal: "Dinner",
+                    food:
+                        "Chicken or fish with rice and vegetables"
+                }
+
+            ]
+
+        },
+
+
+        vegan: {
+
+            title:
+                "FitSync Muscle Building - Vegan",
+
+            meals: [
+
+                {
+                    meal: "Breakfast",
+                    food:
+                        "Oats, soy milk, banana and peanut butter"
+                },
+
+                {
+                    meal: "Lunch",
+                    food:
+                        "Rice, tofu, lentils and vegetables"
+                },
+
+                {
+                    meal: "Snack",
+                    food:
+                        "Soy yogurt, banana and nuts"
+                },
+
+                {
+                    meal: "Dinner",
+                    food:
+                        "Tofu, quinoa, beans and vegetables"
+                }
+
+            ]
+
+        }
 
     },
 
 
-    "gain-weight": {
+    // ======================================
+    // GAIN WEIGHT
+    // ======================================
 
-        title: "FitSync Healthy Weight Gain Plan",
+    "Gain Weight": {
 
-        meals: [
 
-            {
-                meal: "Breakfast",
-                food: "Oats, milk, banana, eggs and peanut butter"
-            },
+        vegetarian: {
 
-            {
-                meal: "Lunch",
-                food: "Rice, chicken, vegetables and curd"
-            },
+            title:
+                "FitSync Healthy Weight Gain - Vegetarian",
 
-            {
-                meal: "Snack",
-                food: "Banana smoothie with milk and nuts"
-            },
+            meals: [
 
-            {
-                meal: "Dinner",
-                food: "Rice, chicken or fish, vegetables and curd"
-            }
+                {
+                    meal: "Breakfast",
+                    food:
+                        "Oats, milk, banana, peanut butter and eggs"
+                },
 
-        ]
+                {
+                    meal: "Lunch",
+                    food:
+                        "Rice, paneer, dal, vegetables and curd"
+                },
+
+                {
+                    meal: "Snack",
+                    food:
+                        "Banana smoothie with milk and nuts"
+                },
+
+                {
+                    meal: "Dinner",
+                    food:
+                        "Paneer, chapati, rice and vegetables"
+                }
+
+            ]
+
+        },
+
+
+        "non-vegetarian": {
+
+            title:
+                "FitSync Healthy Weight Gain - Non-Vegetarian",
+
+            meals: [
+
+                {
+                    meal: "Breakfast",
+                    food:
+                        "Oats, milk, banana, eggs and peanut butter"
+                },
+
+                {
+                    meal: "Lunch",
+                    food:
+                        "Rice, chicken, vegetables and curd"
+                },
+
+                {
+                    meal: "Snack",
+                    food:
+                        "Banana smoothie with milk and nuts"
+                },
+
+                {
+                    meal: "Dinner",
+                    food:
+                        "Chicken or fish, rice and vegetables"
+                }
+
+            ]
+
+        },
+
+
+        vegan: {
+
+            title:
+                "FitSync Healthy Weight Gain - Vegan",
+
+            meals: [
+
+                {
+                    meal: "Breakfast",
+                    food:
+                        "Oats, soy milk, banana and peanut butter"
+                },
+
+                {
+                    meal: "Lunch",
+                    food:
+                        "Rice, tofu, lentils and vegetables"
+                },
+
+                {
+                    meal: "Snack",
+                    food:
+                        "Banana smoothie with soy milk and nuts"
+                },
+
+                {
+                    meal: "Dinner",
+                    food:
+                        "Tofu, rice, beans and vegetables"
+                }
+
+            ]
+
+        }
 
     }
 
 };
-
-
-// ==========================================
-// CURRENT FITSYNC FITNESS DATA
-// ==========================================
-
-// This stores the latest calculated
-// profile, calorie and nutrition data.
-
-let currentFitnessData = null;
 
 
 // ==========================================
@@ -818,15 +1197,20 @@ function calculateNutritionTargets(
 
     return {
 
-        calories: calorieTarget,
+        calories:
+            calorieTarget,
 
-        protein: proteinTarget,
+        protein:
+            proteinTarget,
 
-        carbohydrates: carbohydrates,
+        carbohydrates:
+            carbohydrates,
 
-        fat: fat,
+        fat:
+            fat,
 
-        water: 3
+        water:
+            3
 
     };
 
@@ -839,11 +1223,13 @@ function calculateNutritionTargets(
 
 function getGoalMessages(goal) {
 
+
     if (goal === "Lose Weight") {
 
         return {
 
-            title: "Fat Loss",
+            title:
+                "Fat Loss",
 
             message:
                 "Focus on a sustainable calorie deficit, " +
@@ -859,7 +1245,8 @@ function getGoalMessages(goal) {
 
         return {
 
-            title: "Weight Maintenance",
+            title:
+                "Weight Maintenance",
 
             message:
                 "Focus on maintaining a balanced diet, " +
@@ -874,7 +1261,8 @@ function getGoalMessages(goal) {
 
         return {
 
-            title: "Muscle Building",
+            title:
+                "Muscle Building",
 
             message:
                 "Focus on resistance training, " +
@@ -890,7 +1278,8 @@ function getGoalMessages(goal) {
 
         return {
 
-            title: "Healthy Weight Gain",
+            title:
+                "Healthy Weight Gain",
 
             message:
                 "Focus on a gradual calorie surplus, " +
@@ -904,7 +1293,8 @@ function getGoalMessages(goal) {
 
     return {
 
-        title: "Fitness Goal",
+        title:
+            "Fitness Goal",
 
         message:
             "Please select a valid fitness goal."
@@ -923,6 +1313,7 @@ function displayWorkout(
     day,
     type
 ) {
+
 
     if (!workout) {
 
@@ -951,14 +1342,26 @@ function displayWorkout(
         </h3>
 
         <p>
-            <strong>Day:</strong>
+
+            <strong>
+                Day:
+            </strong>
+
             ${day}
+
         </p>
 
+
         <p>
-            <strong>Workout Type:</strong>
+
+            <strong>
+                Workout Type:
+            </strong>
+
             ${type}
+
         </p>
+
 
         <table>
 
@@ -966,17 +1369,26 @@ function displayWorkout(
 
                 <tr>
 
-                    <th>Exercise</th>
+                    <th>
+                        Exercise
+                    </th>
 
-                    <th>Sets</th>
+                    <th>
+                        Sets
+                    </th>
 
-                    <th>Reps / Duration</th>
+                    <th>
+                        Reps / Duration
+                    </th>
 
-                    <th>Rest</th>
+                    <th>
+                        Rest
+                    </th>
 
                 </tr>
 
             </thead>
+
 
             <tbody>
 
@@ -1039,6 +1451,7 @@ function displayDiet(
     proteinTarget
 ) {
 
+
     if (!diet) {
 
         dietResult.innerHTML = `
@@ -1049,7 +1462,8 @@ function displayDiet(
 
             <p>
                 FitSync could not find a diet
-                recommendation for this goal.
+                recommendation for the selected
+                combination.
             </p>
 
         `;
@@ -1065,21 +1479,30 @@ function displayDiet(
             ${diet.title}
         </h3>
 
+
         <p>
+
             <strong>
                 Daily Calorie Target:
             </strong>
 
-            ${calorieTarget} kcal
+            ${calorieTarget}
+            kcal
+
         </p>
 
+
         <p>
+
             <strong>
                 Daily Protein Target:
             </strong>
 
-            ${proteinTarget} g
+            ${proteinTarget}
+            g
+
         </p>
+
 
         <table>
 
@@ -1087,13 +1510,18 @@ function displayDiet(
 
                 <tr>
 
-                    <th>Meal</th>
+                    <th>
+                        Meal
+                    </th>
 
-                    <th>Recommendation</th>
+                    <th>
+                        Recommendation
+                    </th>
 
                 </tr>
 
             </thead>
+
 
             <tbody>
 
@@ -1146,11 +1574,14 @@ profileForm.addEventListener(
     "submit",
     function (event) {
 
+
+        // Prevent page refresh
+
         event.preventDefault();
 
 
         // ======================================
-        // GET SELECTED FITNESS GOAL
+        // GET FITNESS GOAL
         // ======================================
 
         const selectedGoal =
@@ -1265,19 +1696,26 @@ profileForm.addEventListener(
 
         const userProfile = {
 
-            name: name,
+            name:
+                name,
 
-            age: age,
+            age:
+                age,
 
-            height: height,
+            height:
+                height,
 
-            weight: weight,
+            weight:
+                weight,
 
-            sex: sex,
+            sex:
+                sex,
 
-            goal: goal,
+            goal:
+                goal,
 
-            activityLevel: activityLevel
+            activityLevel:
+                activityLevel
 
         };
 
@@ -1333,7 +1771,7 @@ profileForm.addEventListener(
 
 
         // ======================================
-        // CALCULATE GOAL-BASED CALORIE TARGET
+        // CALCULATE CALORIE TARGET
         // ======================================
 
         const calorieTarget =
@@ -1360,11 +1798,14 @@ profileForm.addEventListener(
 
         const fitnessData = {
 
-            bmi: bmi,
+            bmi:
+                bmi,
 
-            bmiCategory: bmiCategory,
+            bmiCategory:
+                bmiCategory,
 
-            bmr: bmr,
+            bmr:
+                bmr,
 
             maintenanceCalories:
                 maintenanceCalories,
@@ -1379,7 +1820,14 @@ profileForm.addEventListener(
 
 
         // ======================================
-        // SAVE CURRENT FITSYNC FITNESS DATA
+        // SAVE CURRENT FITNESS DATA
+        // ======================================
+        //
+        // This is the new 4.10.7 connection.
+        //
+        // The Diet Planner will use this object
+        // instead of reading values back from HTML.
+        //
         // ======================================
 
         currentFitnessData =
@@ -1435,91 +1883,155 @@ profileForm.addEventListener(
                 FitSync Profile Created
             </h3>
 
+
             <p>
+
                 Welcome,
+
                 <strong>
                     ${userProfile.name}
                 </strong>!
+
             </p>
 
+
             <p>
-                <strong>Age:</strong>
+
+                <strong>
+                    Age:
+                </strong>
+
                 ${userProfile.age}
+
             </p>
 
-            <p>
-                <strong>Height:</strong>
-                ${userProfile.height} cm
-            </p>
 
             <p>
-                <strong>Weight:</strong>
-                ${userProfile.weight} kg
+
+                <strong>
+                    Height:
+                </strong>
+
+                ${userProfile.height}
+                cm
+
             </p>
 
+
             <p>
-                <strong>Sex:</strong>
+
+                <strong>
+                    Weight:
+                </strong>
+
+                ${userProfile.weight}
+                kg
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Sex:
+                </strong>
+
                 ${userProfile.sex}
+
             </p>
 
+
             <p>
-                <strong>BMI:</strong>
+
+                <strong>
+                    BMI:
+                </strong>
+
                 ${fitnessData.bmi}
+
             </p>
 
+
             <p>
-                <strong>BMI Category:</strong>
+
+                <strong>
+                    BMI Category:
+                </strong>
+
                 ${fitnessData.bmiCategory}
+
             </p>
 
+
             <p>
-                <strong>BMR:</strong>
+
+                <strong>
+                    BMR:
+                </strong>
+
                 ${fitnessData.bmr}
                 kcal/day
+
             </p>
 
+
             <p>
+
                 <strong>
                     Estimated Maintenance Calories:
                 </strong>
 
                 ${fitnessData.maintenanceCalories}
                 kcal/day
+
             </p>
 
+
             <p>
+
                 <strong>
                     FitSync Calorie Target:
                 </strong>
 
                 ${fitnessData.calorieTarget}
                 kcal/day
+
             </p>
 
+
             <p>
+
                 <strong>
                     Fitness Goal:
                 </strong>
 
                 ${goalInformation.title}
+
             </p>
 
+
             <p>
+
                 <strong>
                     Activity Level:
                 </strong>
 
                 ${userProfile.activityLevel}
+
             </p>
 
+
             <p>
+
                 <strong>
                     Estimated Protein Target:
                 </strong>
 
                 ${proteinTarget}
                 g/day
+
             </p>
+
 
             <p>
                 ${goalInformation.message}
@@ -1536,14 +2048,18 @@ profileForm.addEventListener(
             "FitSync User Profile:"
         );
 
-        console.log(userProfile);
+        console.log(
+            userProfile
+        );
 
 
         console.log(
             "FitSync Fitness Data:"
         );
 
-        console.log(fitnessData);
+        console.log(
+            fitnessData
+        );
 
 
         console.log(
@@ -1552,6 +2068,7 @@ profileForm.addEventListener(
         );
 
     }
+
 );
 
 
@@ -1563,25 +2080,40 @@ workoutForm.addEventListener(
     "submit",
     function (event) {
 
+
+        // Prevent page refresh
+
         event.preventDefault();
 
 
-        // Get selected day
+        // ======================================
+        // GET SELECTED DAY
+        // ======================================
+
         const selectedDay =
             workoutDay.value;
 
 
-        // Get selected workout type
+        // ======================================
+        // GET SELECTED WORKOUT TYPE
+        // ======================================
+
         const selectedType =
             workoutType.value;
 
 
-        // Find the matching workout
+        // ======================================
+        // FIND WORKOUT
+        // ======================================
+
         const selectedWorkout =
             workoutData[selectedType]?.[selectedDay];
 
 
-        // Display the workout
+        // ======================================
+        // DISPLAY WORKOUT
+        // ======================================
+
         displayWorkout(
             selectedWorkout,
             selectedDay,
@@ -1589,22 +2121,30 @@ workoutForm.addEventListener(
         );
 
     }
+
 );
 
 
 // ==========================================
 // DIET FORM SUBMISSION
 // ==========================================
+//
+// NEW IN MODULE 4.10.7
+//
+// ==========================================
 
 dietForm.addEventListener(
     "submit",
     function (event) {
 
+
+        // Prevent page refresh
+
         event.preventDefault();
 
 
         // ======================================
-        // CHECK PROFILE DATA
+        // CHECK WHETHER PROFILE EXISTS
         // ======================================
 
         if (!currentFitnessData) {
@@ -1616,9 +2156,9 @@ dietForm.addEventListener(
                 </h3>
 
                 <p>
-                    Please submit your profile before
-                    requesting a personalized diet
-                    recommendation.
+                    Please create your FitSync
+                    profile before requesting
+                    a personalized diet.
                 </p>
 
             `;
@@ -1629,7 +2169,7 @@ dietForm.addEventListener(
 
 
         // ======================================
-        // GET SELECTED DIET GOAL
+        // GET SELECTED GOAL
         // ======================================
 
         const selectedGoal =
@@ -1637,15 +2177,31 @@ dietForm.addEventListener(
 
 
         // ======================================
-        // FIND MATCHING DIET
+        // GET DIET PREFERENCE
         // ======================================
 
-        const selectedDiet =
+        const selectedPreference =
+            dietPreference.value;
+
+
+        // ======================================
+        // FIND DIET FOR GOAL
+        // ======================================
+
+        const goalDiet =
             dietData[selectedGoal];
 
 
         // ======================================
-        // GET CURRENT CALORIE TARGET
+        // FIND DIET FOR PREFERENCE
+        // ======================================
+
+        const selectedDiet =
+            goalDiet?.[selectedPreference];
+
+
+        // ======================================
+        // GET CALORIE TARGET
         // ======================================
 
         const calorieTarget =
@@ -1653,7 +2209,7 @@ dietForm.addEventListener(
 
 
         // ======================================
-        // GET CURRENT PROTEIN TARGET
+        // GET PROTEIN TARGET
         // ======================================
 
         const proteinTarget =
@@ -1663,7 +2219,7 @@ dietForm.addEventListener(
 
 
         // ======================================
-        // DISPLAY PERSONALIZED DIET
+        // DISPLAY DIET
         // ======================================
 
         displayDiet(
@@ -1673,4 +2229,5 @@ dietForm.addEventListener(
         );
 
     }
+
 );
