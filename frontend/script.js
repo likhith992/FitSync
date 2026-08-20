@@ -52,6 +52,66 @@ function calculateBMI(weight, height) {
     return Number(bmi.toFixed(2));
 }
 
+function calculateBMR(weight, height, age, sex) {
+
+    let bmr;
+
+    if (sex === "male") {
+
+        bmr =
+            (10 * weight) +
+            (6.25 * height) -
+            (5 * age) +
+            5;
+
+    } 
+    else {
+
+        bmr =
+            (10 * weight) +
+            (6.25 * height) -
+            (5 * age) -
+            161;
+
+    }
+
+    return Math.round(bmr);
+}
+
+function getActivityMultiplier(activityLevel) {
+
+    if (activityLevel === "sedentary") {
+
+        return 1.2;
+
+    }
+    else if (activityLevel === "light") {
+
+        return 1.375;
+
+    }
+    else if (activityLevel === "moderate") {
+
+        return 1.55;
+
+    }
+    else if (activityLevel === "very-active") {
+
+        return 1.725;
+
+    }
+
+    return 1.2;
+}
+
+function calculateMaintenanceCalories(bmr, activityLevel) {
+
+    const multiplier =
+        getActivityMultiplier(activityLevel);
+
+    return Math.round(bmr * multiplier);
+}
+
 function getBMICategory(bmi) {
 
     if (bmi < 18.5) {
@@ -220,6 +280,15 @@ profileForm.addEventListener("submit", function (event) {
     }
 
 
+    if (sex === "") {
+
+    profileResult.textContent =
+        "Please select your sex.";
+
+    return;
+}
+
+
     // ======================================
     // CREATE USER PROFILE OBJECT
     // ======================================
@@ -258,7 +327,20 @@ profileForm.addEventListener("submit", function (event) {
     userProfile.height
     );
 
-    const bmiCategory = getBMICategory(bmi);    
+    const bmiCategory = getBMICategory(bmi);
+    
+    const bmr = calculateBMR(
+    userProfile.weight,
+    userProfile.height,
+    userProfile.age,
+    userProfile.sex
+    );
+
+    const maintenanceCalories =
+    calculateMaintenanceCalories(
+        bmr,
+        userProfile.activityLevel
+    );
 
 
     // ======================================
@@ -304,6 +386,16 @@ profileForm.addEventListener("submit", function (event) {
          <p>
             <strong>BMI Category:</strong>
         ${bmiCategory}
+        </p>
+
+        <p>
+            <strong>BMR:</strong>
+        ${bmr} kcal/day
+        </p>
+
+        <p>
+        <strong>Estimated Maintenance Calories:</strong>
+        ${maintenanceCalories} kcal/day
         </p>
 
         <p>
