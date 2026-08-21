@@ -2251,6 +2251,38 @@ function calculateWeightChange() {
 
 
 // ==========================================
+// GET PROGRESS STATUS
+// ==========================================
+
+function getProgressStatus(weightChange) {
+
+    if (weightChange === null) {
+
+        return "Not enough data to determine progress.";
+
+    }
+
+
+    if (weightChange < 0) {
+
+        return "Your weight has decreased since your previous entry.";
+
+    }
+
+
+    if (weightChange > 0) {
+
+        return "Your weight has increased since your previous entry.";
+
+    }
+
+
+    return "Your weight has remained the same since your previous entry.";
+
+}
+
+
+// ==========================================
 // PROFILE FORM SUBMISSION
 // ==========================================
 
@@ -3067,6 +3099,11 @@ progressForm.addEventListener(
         calculateWeightChange();
 
 
+        const progressStatus =
+        getProgressStatus(
+        weightChange
+    );
+
         // ======================================
         // DISPLAY WEIGHT CHANGE
         // ======================================
@@ -3115,6 +3152,26 @@ if (weightChange !== null) {
     `;
 
 }
+
+    progressResult.innerHTML += `
+
+    <p>
+        <strong>
+            Weight Change:
+        </strong>
+
+        ${weightChange} kg
+    </p>
+
+    <p>
+        <strong>
+            Progress Status:
+        </strong>
+
+        ${progressStatus}
+    </p>
+
+`;
 
         // ======================================
         // CLEAR FORM
