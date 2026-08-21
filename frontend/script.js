@@ -2204,6 +2204,53 @@ function displayProgressHistory() {
 
 
 // ==========================================
+// LOAD PROGRESS HISTORY ON PAGE LOAD
+// ==========================================
+
+displayProgressHistory();
+
+
+// ==========================================
+// CALCULATE WEIGHT CHANGE
+// ==========================================
+
+function calculateWeightChange() {
+
+    // Need at least two progress entries
+    // to calculate a change.
+
+    if (progressData.length < 2) {
+
+        return null;
+
+    }
+
+
+    const previousEntry =
+        progressData[
+            progressData.length - 2
+        ];
+
+
+    const currentEntry =
+        progressData[
+            progressData.length - 1
+        ];
+
+
+    const weightChange =
+        currentEntry.weight -
+        previousEntry.weight;
+
+
+    return Number(
+        weightChange.toFixed(1)
+    );
+
+}
+
+
+// ==========================================
 // PROFILE FORM SUBMISSION
 // ==========================================
 
@@ -3011,6 +3058,63 @@ progressForm.addEventListener(
 
         displayProgressHistory();
 
+
+        // ======================================
+        // CALCULATE WEIGHT CHANGE
+        // ======================================
+
+        const weightChange =
+        calculateWeightChange();
+
+
+        // ======================================
+        // DISPLAY WEIGHT CHANGE
+        // ======================================
+
+if (weightChange !== null) {
+
+    let changeMessage;
+
+
+    if (weightChange > 0) {
+
+        changeMessage =
+            `Weight increased by ${weightChange} kg.`;
+
+    }
+
+    else if (weightChange < 0) {
+
+        changeMessage =
+            `Weight decreased by ${Math.abs(weightChange)} kg.`;
+
+    }
+
+    else {
+
+        changeMessage =
+            "Your weight has remained the same.";
+
+    }
+
+
+    progressResult.innerHTML += `
+
+        <p>
+            <strong>
+                Weight Change:
+            </strong>
+
+            ${weightChange} kg
+        </p>
+
+        <p>
+            ${changeMessage}
+        </p>
+
+    `;
+
+}
 
         // ======================================
         // CLEAR FORM
