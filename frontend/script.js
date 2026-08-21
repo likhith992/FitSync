@@ -87,12 +87,41 @@ const dietResult =
 
 
 // ==========================================
+// PROGRESS TRACKER ELEMENTS
+// ==========================================
+
+const progressForm =
+    document.getElementById("progress-form");
+
+const progressWeight =
+    document.getElementById("progress-weight");
+
+const progressDate =
+    document.getElementById("progress-date");
+
+const progressResult =
+    document.getElementById("progress-result");
+
+const progressHistory =
+    document.getElementById("progress-history");
+
+// ==========================================
 // CURRENT FITSYNC FITNESS DATA
 // ==========================================
 
 
 
 let currentFitnessData = null;
+
+
+// ==========================================
+// FITSYNC PROGRESS DATA
+// ==========================================
+
+// Stores all progress entries during the
+// current browser session.
+
+const progressData = [];
 
 
 // ==========================================
@@ -2043,6 +2072,109 @@ function displayDiet(
 
 
 // ==========================================
+// DISPLAY PROGRESS HISTORY
+// ==========================================
+
+function displayProgressHistory() {
+
+    // ======================================
+    // CHECK WHETHER THERE ARE ANY ENTRIES
+    // ======================================
+
+    if (progressData.length === 0) {
+
+        progressHistory.innerHTML = "";
+
+        return;
+
+    }
+
+
+    // ======================================
+    // CREATE HISTORY TABLE
+    // ======================================
+
+    let historyHTML = `
+
+        <h3>
+            FitSync Progress History
+        </h3>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Weight
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+    `;
+
+
+    // ======================================
+    // ADD EACH PROGRESS ENTRY
+    // ======================================
+
+    progressData.forEach(
+        function (entry) {
+
+            historyHTML += `
+
+                <tr>
+
+                    <td>
+                        ${entry.date}
+                    </td>
+
+                    <td>
+                        ${entry.weight}
+                        kg
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    // ======================================
+    // CLOSE TABLE
+    // ======================================
+
+    historyHTML += `
+
+            </tbody>
+
+        </table>
+
+    `;
+
+
+    // ======================================
+    // DISPLAY HISTORY
+    // ======================================
+
+    progressHistory.innerHTML =
+        historyHTML;
+
+}
+
+
+// ==========================================
 // PROFILE FORM SUBMISSION
 // ==========================================
 
@@ -2603,7 +2735,7 @@ workoutForm.addEventListener(
 // DIET FORM SUBMISSION
 // ==========================================
 //
-// NEW IN MODULE 4.10.7
+// 
 //
 // ==========================================
 
@@ -2702,4 +2834,152 @@ dietForm.addEventListener(
 
     }
 
+);
+
+
+// ==========================================
+// PROGRESS FORM SUBMISSION
+// ==========================================
+
+progressForm.addEventListener(
+    "submit",
+    function (event) {
+
+        // Prevent page refresh
+        event.preventDefault();
+
+
+        // ======================================
+        // GET PROGRESS VALUES
+        // ======================================
+
+        const enteredWeight =
+            Number(progressWeight.value);
+
+        const enteredDate =
+            progressDate.value;
+
+
+        // ======================================
+        // VALIDATE WEIGHT
+        // ======================================
+
+        if (enteredWeight <= 0) {
+
+            progressResult.innerHTML = `
+
+                <p>
+                    Please enter a valid weight.
+                </p>
+
+            `;
+
+            return;
+
+        }
+
+
+        // ======================================
+        // VALIDATE DATE
+        // ======================================
+
+        if (enteredDate === "") {
+
+            progressResult.innerHTML = `
+
+                <p>
+                    Please select a date.
+                </p>
+
+            `;
+
+            return;
+
+        }
+
+
+        // ======================================
+        // CREATE PROGRESS ENTRY
+        // ======================================
+
+        const progressEntry = {
+
+            weight:
+                enteredWeight,
+
+            date:
+                enteredDate
+
+        };
+
+
+        // ======================================
+        // STORE PROGRESS ENTRY
+        // ======================================
+
+        progressData.push(
+            progressEntry
+        );
+
+
+        // ======================================
+        // DISPLAY RESULT
+        // ======================================
+
+        progressResult.innerHTML = `
+
+            <h3>
+                FitSync Progress Saved
+            </h3>
+
+            <p>
+
+                <strong>
+                    Date:
+                </strong>
+
+                ${enteredDate}
+
+            </p>
+
+            <p>
+
+                <strong>
+                    Weight:
+                </strong>
+
+                ${enteredWeight}
+                kg
+
+            </p>
+
+            <p>
+
+                <strong>
+                    Total Progress Entries:
+                </strong>
+
+                ${progressData.length}
+
+            </p>
+
+        `;
+
+
+        // ======================================
+        // UPDATE PROGRESS HISTORY
+        // ======================================
+
+        displayProgressHistory();
+
+
+        // ======================================
+        // CLEAR FORM
+        // ======================================
+
+        progressWeight.value = "";
+
+        progressDate.value = "";
+
+    }
 );
