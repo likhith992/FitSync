@@ -90,8 +90,7 @@ const dietResult =
 // CURRENT FITSYNC FITNESS DATA
 // ==========================================
 
-// This variable stores the latest calculated
-// profile and nutrition information.
+
 
 let currentFitnessData = null;
 
@@ -205,6 +204,118 @@ const workoutData = {
                 rest: "60 sec"
             }
 
+        ],
+
+
+        // Added Tuesday workout
+
+        tuesday: [
+
+            {
+                exercise: "Overhead Press",
+                sets: 3,
+                reps: 10,
+                rest: "60 sec"
+            },
+
+            {
+                exercise: "Dumbbell Lateral Raise",
+                sets: 3,
+                reps: 12,
+                rest: "45 sec"
+            },
+
+            {
+                exercise: "Tricep Dips",
+                sets: 3,
+                reps: 10,
+                rest: "60 sec"
+            }
+
+        ],
+
+
+        // Added Thursday workout
+
+        thursday: [
+
+            {
+                exercise: "Goblet Squat",
+                sets: 3,
+                reps: 12,
+                rest: "60 sec"
+            },
+
+            {
+                exercise: "Walking Lunges",
+                sets: 3,
+                reps: 12,
+                rest: "60 sec"
+            },
+
+            {
+                exercise: "Calf Raises",
+                sets: 3,
+                reps: 15,
+                rest: "45 sec"
+            }
+
+        ],
+
+
+        // Added Saturday workout
+
+        saturday: [
+
+            {
+                exercise: "Deadlift",
+                sets: 3,
+                reps: 6,
+                rest: "120 sec"
+            },
+
+            {
+                exercise: "Pull Ups",
+                sets: 3,
+                reps: 8,
+                rest: "90 sec"
+            },
+
+            {
+                exercise: "Barbell Row",
+                sets: 3,
+                reps: 10,
+                rest: "90 sec"
+            }
+
+        ],
+
+
+        // Added Sunday workout
+
+        sunday: [
+
+            {
+                exercise: "Push Ups",
+                sets: 3,
+                reps: 12,
+                rest: "45 sec"
+            },
+
+            {
+                exercise: "Bodyweight Squats",
+                sets: 3,
+                reps: 15,
+                rest: "45 sec"
+            },
+
+            {
+                exercise: "Plank",
+                sets: 3,
+                reps: "30 sec",
+                rest: "30 sec"
+            }
+
         ]
 
     },
@@ -268,6 +379,90 @@ const workoutData = {
                 sets: 3,
                 reps: "2 min",
                 rest: "1 min"
+            }
+
+        ],
+
+
+        // Added Tuesday workout
+
+        tuesday: [
+
+            {
+                exercise: "Jogging",
+                sets: 1,
+                reps: "20 min",
+                rest: "2 min"
+            },
+
+            {
+                exercise: "Jump Rope",
+                sets: 3,
+                reps: "2 min",
+                rest: "1 min"
+            }
+
+        ],
+
+
+        // Added Thursday workout
+
+        thursday: [
+
+            {
+                exercise: "Stair Climbing",
+                sets: 3,
+                reps: "5 min",
+                rest: "2 min"
+            },
+
+            {
+                exercise: "Brisk Walking",
+                sets: 1,
+                reps: "15 min",
+                rest: "2 min"
+            }
+
+        ],
+
+
+        // Added Saturday workout
+
+        saturday: [
+
+            {
+                exercise: "Cycling",
+                sets: 1,
+                reps: "30 min",
+                rest: "3 min"
+            },
+
+            {
+                exercise: "Brisk Walking",
+                sets: 1,
+                reps: "20 min",
+                rest: "2 min"
+            }
+
+        ],
+
+
+        // Added Sunday workout
+
+        sunday: [
+
+            {
+                exercise: "Easy Walking",
+                sets: 1,
+                reps: "30 min",
+                rest: "3 min"
+            },
+
+            {
+                exercise: "Light Cycling",
+                sets: 1,
+                reps: "15 min",
+                rest: "3 min"
             }
 
         ]
@@ -337,6 +532,146 @@ const workoutData = {
                 rest: "30 sec"
             }
 
+        ],
+
+
+        // Added Monday workout
+
+        monday: [
+
+            {
+                exercise: "Jumping Jacks",
+                sets: 3,
+                reps: 30,
+                rest: "30 sec"
+            },
+
+            {
+                exercise: "High Knees",
+                sets: 3,
+                reps: 30,
+                rest: "30 sec"
+            },
+
+            {
+                exercise: "Burpees",
+                sets: 3,
+                reps: 10,
+                rest: "60 sec"
+            }
+
+        ],
+
+
+        // Added Wednesday workout
+
+        wednesday: [
+
+            {
+                exercise: "Mountain Climbers",
+                sets: 3,
+                reps: 20,
+                rest: "30 sec"
+            },
+
+            {
+                exercise: "Skater Jumps",
+                sets: 3,
+                reps: 20,
+                rest: "45 sec"
+            },
+
+            {
+                exercise: "High Knees",
+                sets: 3,
+                reps: 30,
+                rest: "30 sec"
+            }
+
+        ],
+
+
+        // Added Friday workout
+
+        friday: [
+
+            {
+                exercise: "Jump Squats",
+                sets: 3,
+                reps: 15,
+                rest: "45 sec"
+            },
+
+            {
+                exercise: "Burpees",
+                sets: 3,
+                reps: 10,
+                rest: "60 sec"
+            },
+
+            {
+                exercise: "Mountain Climbers",
+                sets: 3,
+                reps: 20,
+                rest: "30 sec"
+            }
+
+        ],
+
+
+        // Added Saturday workout
+
+        saturday: [
+
+            {
+                exercise: "High Knees",
+                sets: 3,
+                reps: 30,
+                rest: "30 sec"
+            },
+
+            {
+                exercise: "Jumping Jacks",
+                sets: 3,
+                reps: 30,
+                rest: "30 sec"
+            },
+
+            {
+                exercise: "Mountain Climbers",
+                sets: 3,
+                reps: 20,
+                rest: "30 sec"
+            }
+
+        ],
+
+
+        // Added Sunday workout
+
+        sunday: [
+
+            {
+                exercise: "Low Impact High Knees",
+                sets: 3,
+                reps: 30,
+                rest: "30 sec"
+            },
+
+            {
+                exercise: "Step Jacks",
+                sets: 3,
+                reps: 30,
+                rest: "30 sec"
+            },
+
+            {
+                exercise: "Bodyweight Squats",
+                sets: 3,
+                reps: 15,
+                rest: "45 sec"
+            }
+
         ]
 
     },
@@ -402,6 +737,146 @@ const workoutData = {
                 sets: 2,
                 reps: "30 sec",
                 rest: "15 sec"
+            }
+
+        ],
+
+
+        // Added Monday workout
+
+        monday: [
+
+            {
+                exercise: "Neck Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Shoulder Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Hamstring Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            }
+
+        ],
+
+
+        // Added Wednesday workout
+
+        wednesday: [
+
+            {
+                exercise: "Cat-Cow Stretch",
+                sets: 2,
+                reps: 10,
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Child's Pose",
+                sets: 2,
+                reps: "45 sec",
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Cobra Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            }
+
+        ],
+
+
+        // Added Friday workout
+
+        friday: [
+
+            {
+                exercise: "Chest Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Triceps Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Shoulder Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            }
+
+        ],
+
+
+        // Added Saturday workout
+
+        saturday: [
+
+            {
+                exercise: "Hip Flexor Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Hamstring Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Calf Stretch",
+                sets: 2,
+                reps: "30 sec",
+                rest: "15 sec"
+            }
+
+        ],
+
+
+        // Added Sunday workout
+
+        sunday: [
+
+            {
+                exercise: "Child's Pose",
+                sets: 2,
+                reps: "45 sec",
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Cat-Cow Stretch",
+                sets: 2,
+                reps: 10,
+                rest: "15 sec"
+            },
+
+            {
+                exercise: "Full Body Stretch",
+                sets: 2,
+                reps: "60 sec",
+                rest: "20 sec"
             }
 
         ]
@@ -953,6 +1428,8 @@ function calculateProtein(weight, goal) {
 }
 
 
+
+
 // ==========================================
 // BMI CALCULATION
 // ==========================================
@@ -1311,9 +1788,8 @@ function getGoalMessages(goal) {
 function displayWorkout(
     workout,
     day,
-    type
-) {
-
+    type) 
+{
 
     if (!workout) {
 
@@ -1340,6 +1816,7 @@ function displayWorkout(
         <h3>
             FitSync Workout
         </h3>
+
 
         <p>
 
@@ -1448,9 +1925,8 @@ function displayWorkout(
 function displayDiet(
     diet,
     calorieTarget,
-    proteinTarget
-) {
-
+    proteinTarget)
+{
 
     if (!diet) {
 
@@ -1919,8 +2395,8 @@ profileForm.addEventListener(
 
 
             <p>
-
-                <strong>
+                <stro
+                ng>
                     Weight:
                 </strong>
 
@@ -2079,10 +2555,8 @@ profileForm.addEventListener(
 workoutForm.addEventListener(
     "submit",
     function (event) {
-
-
-        // Prevent page refresh
-
+ 
+         // Prevent page refresh
         event.preventDefault();
 
 
@@ -2135,11 +2609,9 @@ workoutForm.addEventListener(
 
 dietForm.addEventListener(
     "submit",
-    function (event) {
+     function (event) {
 
-
-        // Prevent page refresh
-
+         // Prevent page refresh
         event.preventDefault();
 
 
