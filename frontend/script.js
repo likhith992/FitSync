@@ -118,11 +118,40 @@ let currentFitnessData = null;
 // FITSYNC PROGRESS DATA
 // ==========================================
 
-// Stores all progress entries during the
-// current browser session.
+// Load previously saved progress data
+// from the browser.
 
-const progressData = [];
+let progressData = [];
 
+try {
+
+    const savedProgressData =
+        localStorage.getItem(
+            "fitsyncProgressData"
+        );
+
+
+    if (savedProgressData) {
+
+        progressData =
+            JSON.parse(
+                savedProgressData
+            );
+
+    }
+
+}
+
+catch (error) {
+
+    console.error(
+        "Unable to load saved progress data:",
+        error
+    );
+
+    progressData = [];
+
+}
 
 // ==========================================
 // FITSYNC WORKOUT DATA
@@ -2919,6 +2948,16 @@ progressForm.addEventListener(
 
         progressData.push(
             progressEntry
+        );
+
+
+        // ======================================
+        // SAVE PROGRESS DATA TO LOCAL STORAGE
+        // ======================================
+ 
+        localStorage.setItem(
+        "fitsyncProgressData",
+        JSON.stringify(progressData)
         );
 
 
