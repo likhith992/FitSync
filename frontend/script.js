@@ -1977,6 +1977,50 @@ function displayWorkout(
 
 
 // ==========================================
+// GET PERSONALIZED WORKOUT TYPE
+// ==========================================
+
+function getPersonalizedWorkoutType(goal) {
+
+    // Lose Weight → Cardio
+    if (goal === "Lose Weight") {
+
+        return "cardio";
+
+    }
+
+
+    // Build Muscle → Strength Training
+    if (goal === "Build Muscle") {
+
+        return "strength";
+
+    }
+
+
+    // Gain Weight → Strength Training
+    if (goal === "Gain Weight") {
+
+        return "strength";
+
+    }
+
+
+    // Maintain Weight → Full-body style
+    if (goal === "Maintain Weight") {
+
+        return "strength";
+
+    }
+
+
+    // Default
+    return "strength";
+
+}
+
+
+// ==========================================
 // DISPLAY DIET
 // ==========================================
 
@@ -2530,7 +2574,10 @@ profileForm.addEventListener(
                 calorieTarget,
 
             nutritionTargets:
-                nutritionTargets
+                nutritionTargets,
+            
+            goal:
+               userProfile.goal
 
         };
 
@@ -2817,12 +2864,47 @@ workoutForm.addEventListener(
 
 
         // ======================================
-        // FIND WORKOUT
+        // GET USER FITNESS GOAL
         // ======================================
 
-        const selectedWorkout =
-            workoutData[selectedType]?.[selectedDay];
+        let workoutGoal = null;
 
+        if (
+        currentFitnessData &&
+        currentFitnessData.goal
+        ) {
+
+        workoutGoal =
+        currentFitnessData.goal;
+
+        }
+
+
+// ======================================
+// PERSONALIZED WORKOUT SUGGESTION
+// ======================================
+
+let personalizedType =
+    selectedType;
+
+let suggestedType = null;
+
+if (workoutGoal) {
+
+    suggestedType =
+        getPersonalizedWorkoutType(
+            workoutGoal
+        );
+
+}      
+
+
+// ======================================
+// GET WORKOUT FOR SELECTED DAY
+// ======================================
+
+const selectedWorkout =
+    workoutData[selectedType]?.[selectedDay];
 
         // ======================================
         // DISPLAY WORKOUT
@@ -2834,7 +2916,43 @@ workoutForm.addEventListener(
             selectedType
         );
 
-    }
+
+// ======================================
+// DISPLAY PERSONALIZED RECOMMENDATION
+// ======================================
+
+if (
+    suggestedType &&
+    suggestedType !== selectedType
+) {
+
+    const suggestedWorkoutName =
+        suggestedType === "strength"
+            ? "Strength Training"
+            : suggestedType === "cardio"
+                ? "Cardio"
+                : suggestedType === "hiit"
+                    ? "HIIT"
+                    : "Flexibility";
+
+
+    workoutResult.innerHTML += `
+
+        <p>
+            <strong>
+                FitSync Recommendation:
+            </strong>
+
+            ${suggestedWorkoutName}
+            is recommended based on your
+            goal of <strong>${workoutGoal}</strong>.
+        </p>
+
+    `;
+
+}
+
+}
 
 );
 
