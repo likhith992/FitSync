@@ -1,3 +1,4 @@
+import ProfileForm from "./ProfileForm";
 import { useState } from "react";
 import ExerciseCard from "./ExerciseCard";
 
@@ -32,6 +33,7 @@ function App() {
     <option value="Wednesday">Wednesday</option>
     <option value="Friday">Friday</option>
 </select>
+
       {hasWorkout ? (
     <p>Workout Ready!</p>
 ) : (
@@ -46,6 +48,7 @@ function App() {
         reps={exercise.reps}
     />
 ))}
+  <ProfileForm />
     </div>
   )
 }
