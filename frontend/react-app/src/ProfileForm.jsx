@@ -16,6 +16,15 @@ function ProfileForm() {
             />
 
             <p>Your name: {name}</p>
+            <label>Age:</label>
+
+<input
+    type="number"
+    value={age}
+    onChange={(event) => setAge(event.target.value)}
+/>
+
+<p>Your age: {age}</p>
         </div>
     );
 }
