@@ -1,6 +1,8 @@
+import { useState } from "react";
 import ExerciseCard from "./ExerciseCard";
 
 function App() {
+  const [day, setDay] = useState("Monday");
   const exercises = [
     {
       name: "Bench Press",
@@ -24,7 +26,10 @@ function App() {
     <div>
       <h1>FitSync Workout Planner</h1>
 
-      <h2>Today's Workout</h2>
+      <h2>{day}'s Workout</h2>
+      <button onClick={() => setDay("Wednesday")}>
+    Wednesday
+</button>
       {hasWorkout ? (
     <p>Workout Ready!</p>
 ) : (
