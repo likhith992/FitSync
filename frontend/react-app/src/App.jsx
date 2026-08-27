@@ -27,9 +27,11 @@ function App() {
       <h1>FitSync Workout Planner</h1>
 
       <h2>{day}'s Workout</h2>
-      <button onClick={() => setDay("Wednesday")}>
-    Wednesday
-</button>
+      <select onChange={(event) => setDay(event.target.value)}>
+    <option value="Monday">Monday</option>
+    <option value="Wednesday">Wednesday</option>
+    <option value="Friday">Friday</option>
+</select>
       {hasWorkout ? (
     <p>Workout Ready!</p>
 ) : (
