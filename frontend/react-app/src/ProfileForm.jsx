@@ -6,10 +6,10 @@ function ProfileForm() {
     const [height, setHeight] = useState("");
     const [weight, setWeight] = useState("");
     const [profileCreated, setProfileCreated] = useState(false);
-
+ 
     useEffect(() => {
-    console.log("ProfileForm rendered");
-});
+    console.log("Name changed:", name);
+}, [name]);
 
     function handleSubmit(event) {
         event.preventDefault();
