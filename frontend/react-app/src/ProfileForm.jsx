@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function ProfileForm() {
     const [name, setName] = useState("");
@@ -6,6 +6,8 @@ function ProfileForm() {
     const [height, setHeight] = useState("");
     const [weight, setWeight] = useState("");
     const [profileCreated, setProfileCreated] = useState(false);
+
+    const nameInputRef = useRef(null);
  
     useEffect(() => {
     console.log("Name changed:", name);
@@ -30,10 +32,14 @@ function ProfileForm() {
                 <label>Name:</label>
 
                 <input
+                    ref={nameInputRef}
                     type="text"
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                 />
+                <button onClick={() => nameInputRef.current.focus()}>
+                Focus Name
+                </button>
 
                 <p>Your name: {name}</p>
 
