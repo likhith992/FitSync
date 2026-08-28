@@ -10,6 +10,8 @@ function ProfileForm() {
 
         console.log("Name:", name);
         console.log("Age:", age);
+        console.log("Height:", height);
+        console.log("Weight:", weight);
     }
 
     return (
