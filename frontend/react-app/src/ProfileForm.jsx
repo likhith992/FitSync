@@ -3,7 +3,7 @@ import { useState } from "react";
 function ProfileForm() {
     const [name, setName] = useState("");
     const [age, setAge] = useState("");
-
+    const [height, setHeight] = useState("");
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -36,6 +36,16 @@ function ProfileForm() {
                 />
 
                 <p>Your age: {age}</p>
+
+                <label>Height (cm):</label>
+
+                <input
+                    type="number"
+                    value={height}
+                    onChange={(event) => setHeight(event.target.value)}
+                />
+
+                <p>Your height: {height} cm</p>
 
                 <button type="submit">
                     Create Profile
