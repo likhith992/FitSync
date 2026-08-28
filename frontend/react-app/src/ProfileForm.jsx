@@ -4,6 +4,7 @@ function ProfileForm() {
     const [name, setName] = useState("");
     const [age, setAge] = useState("");
     const [height, setHeight] = useState("");
+    const [weight, setWeight] = useState("");
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -46,6 +47,16 @@ function ProfileForm() {
                 />
 
                 <p>Your height: {height} cm</p>
+
+                <label>Weight (kg):</label>
+
+<input
+    type="number"
+    value={weight}
+    onChange={(event) => setWeight(event.target.value)}
+/>
+
+<p>Your weight: {weight} kg</p>
 
                 <button type="submit">
                     Create Profile
