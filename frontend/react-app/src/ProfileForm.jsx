@@ -5,6 +5,8 @@ function ProfileForm() {
     const [age, setAge] = useState("");
     const [height, setHeight] = useState("");
     const [weight, setWeight] = useState("");
+    const [profileCreated, setProfileCreated] = useState(false);
+
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -12,8 +14,9 @@ function ProfileForm() {
         console.log("Age:", age);
         console.log("Height:", height);
         console.log("Weight:", weight);
+        setProfileCreated(true);
     }
-
+       
     return (
         <div>
             <h2>FitSync Profile</h2>
@@ -65,6 +68,16 @@ function ProfileForm() {
                 </button>
 
             </form>
+            {profileCreated && (
+    <div>
+        <h3>Profile Created!</h3>
+        <p>Name: {name}</p>
+        <p>Age: {age}</p>
+        <p>Height: {height} cm</p>
+        <p>Weight: {weight} kg</p>
+    </div>
+)}
+
         </div>
     );
 }
