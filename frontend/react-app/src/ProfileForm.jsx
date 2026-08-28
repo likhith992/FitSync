@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function ProfileForm() {
     const [name, setName] = useState("");
@@ -6,6 +6,10 @@ function ProfileForm() {
     const [height, setHeight] = useState("");
     const [weight, setWeight] = useState("");
     const [profileCreated, setProfileCreated] = useState(false);
+
+    useEffect(() => {
+    console.log("ProfileForm rendered");
+});
 
     function handleSubmit(event) {
         event.preventDefault();
