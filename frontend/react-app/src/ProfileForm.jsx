@@ -1,28 +1,32 @@
 import { useState, useEffect, useRef } from "react";
 
 function ProfileForm({ name, setName }) {
-  
-    const [age, setAge] = useState("");
-    const [height, setHeight] = useState("");
-    const [weight, setWeight] = useState("");
+
+    const [profile, setProfile] = useState({
+        age: "",
+        height: "",
+        weight: ""
+    });
+
     const [profileCreated, setProfileCreated] = useState(false);
 
     const nameInputRef = useRef(null);
- 
+
     useEffect(() => {
-    console.log("Name changed:", name);
-}, [name]);
+        console.log("Name changed:", name);
+    }, [name]);
 
     function handleSubmit(event) {
         event.preventDefault();
 
         console.log("Name:", name);
-        console.log("Age:", age);
-        console.log("Height:", height);
-        console.log("Weight:", weight);
+        console.log("Age:", profile.age);
+        console.log("Height:", profile.height);
+        console.log("Weight:", profile.weight);
+
         setProfileCreated(true);
     }
-       
+
     return (
         <div>
             <h2>FitSync Profile</h2>
@@ -37,8 +41,12 @@ function ProfileForm({ name, setName }) {
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                 />
-                <button onClick={() => nameInputRef.current.focus()}>
-                Focus Name
+
+                <button
+                    type="button"
+                    onClick={() => nameInputRef.current.focus()}
+                >
+                    Focus Name
                 </button>
 
                 <p>Your name: {name}</p>
@@ -47,46 +55,62 @@ function ProfileForm({ name, setName }) {
 
                 <input
                     type="number"
-                    value={age}
-                    onChange={(event) => setAge(event.target.value)}
+                    value={profile.age}
+                    onChange={(event) =>
+                        setProfile(prevProfile => ({
+                            ...prevProfile,
+                            age: event.target.value
+                        }))
+                    }
                 />
 
-                <p>Your age: {age}</p>
+                <p>Your age: {profile.age}</p>
 
                 <label>Height (cm):</label>
 
                 <input
                     type="number"
-                    value={height}
-                    onChange={(event) => setHeight(event.target.value)}
+                    value={profile.height}
+                    onChange={(event) =>
+                        setProfile(prevProfile => ({
+                            ...prevProfile,
+                            height: event.target.value
+                        }))
+                    }
                 />
 
-                <p>Your height: {height} cm</p>
+                <p>Your height: {profile.height} cm</p>
 
                 <label>Weight (kg):</label>
 
-<input
-    type="number"
-    value={weight}
-    onChange={(event) => setWeight(event.target.value)}
-/>
+                <input
+                    type="number"
+                    value={profile.weight}
+                    onChange={(event) =>
+                        setProfile(prevProfile => ({
+                            ...prevProfile,
+                            weight: event.target.value
+                        }))
+                    }
+                />
 
-<p>Your weight: {weight} kg</p>
+                <p>Your weight: {profile.weight} kg</p>
 
                 <button type="submit">
                     Create Profile
                 </button>
 
             </form>
+
             {profileCreated && (
-    <div>
-        <h3>Profile Created!</h3>
-        <p>Name: {name}</p>
-        <p>Age: {age}</p>
-        <p>Height: {height} cm</p>
-        <p>Weight: {weight} kg</p>
-    </div>
-)}
+                <div>
+                    <h3>Profile Created!</h3>
+                    <p>Name: {name}</p>
+                    <p>Age: {profile.age}</p>
+                    <p>Height: {profile.height} cm</p>
+                    <p>Weight: {profile.weight} kg</p>
+                </div>
+            )}
 
         </div>
     );
