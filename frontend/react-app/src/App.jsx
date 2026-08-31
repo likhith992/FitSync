@@ -47,6 +47,14 @@ function App() {
         );
     }
 
+    function removeExercise() {
+    setExercises(prevExercises =>
+        prevExercises.filter(exercise =>
+            exercise.name !== "Push Ups"
+        )
+    );
+}
+
     return (
         <div>
             <h1>FitSync Workout Planner</h1>
@@ -71,6 +79,10 @@ function App() {
 
             <button onClick={updateExercise}>
                 Update Bench Press
+            </button>
+
+            <button onClick={removeExercise}>
+                Remove Push Ups
             </button>
 
             {exercises.map((exercise) => (
