@@ -23,6 +23,16 @@ function App() {
     }
 ]);
   const hasWorkout = exercises.length > 0;
+  function addExercise() {
+    setExercises(prevExercises => [
+        ...prevExercises,
+        {
+            name: "Tricep Pushdown",
+            sets: 3,
+            reps: 12
+        }
+    ]);
+}
 
   return (
     <div>
@@ -41,6 +51,9 @@ function App() {
     <p>No workout available.</p>
 )}
 
+<button onClick={addExercise}>
+    Add Exercise
+</button>
       {exercises.map((exercise) => (
     <ExerciseCard
         key={exercise.name}
