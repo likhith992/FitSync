@@ -4,6 +4,7 @@ import ExerciseCard from "./ExerciseCard";
 
 function App() {
   const [day, setDay] = useState("Monday");
+  const [name, setName] = useState("");
   const exercises = [
     {
       name: "Bench Press",
@@ -48,7 +49,10 @@ function App() {
         reps={exercise.reps}
     />
 ))}
-  <ProfileForm />
+<ProfileForm
+    name={name}
+    setName={setName}
+/>
     </div>
   )
 }

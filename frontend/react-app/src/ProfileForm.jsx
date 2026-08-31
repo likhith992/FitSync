@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
-function ProfileForm() {
-    const [name, setName] = useState("");
+function ProfileForm({ name, setName }) {
+  
     const [age, setAge] = useState("");
     const [height, setHeight] = useState("");
     const [weight, setWeight] = useState("");
