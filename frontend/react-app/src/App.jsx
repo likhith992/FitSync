@@ -5,23 +5,23 @@ import ExerciseCard from "./ExerciseCard";
 function App() {
   const [day, setDay] = useState("Monday");
   const [name, setName] = useState("");
-  const exercises = [
+ const [exercises, setExercises] = useState([
     {
-      name: "Bench Press",
-      sets: 3,
-      reps: 8
+        name: "Bench Press",
+        sets: 3,
+        reps: 8
     },
     {
-      name: "Incline Dumbbell Press",
-      sets: 3,
-      reps: 10
+        name: "Incline Dumbbell Press",
+        sets: 3,
+        reps: 10
     },
     {
-      name: "Push Ups",
-      sets: 3,
-      reps: 12
+        name: "Push Ups",
+        sets: 3,
+        reps: 12
     }
-  ]
+]);
   const hasWorkout = exercises.length > 0;
 
   return (
