@@ -55,6 +55,10 @@ function App() {
     );
 }
 
+function completeExercise() {
+    console.log("Exercise completed!");
+} 
+
     return (
         <div>
             <h1>FitSync Workout Planner</h1>
@@ -91,6 +95,7 @@ function App() {
                     name={exercise.name}
                     sets={exercise.sets}
                     reps={exercise.reps}
+                    onComplete={completeExercise}
                 />
             ))}
 
