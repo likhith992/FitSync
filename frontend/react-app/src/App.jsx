@@ -1,6 +1,7 @@
 import ProfileForm from "./ProfileForm";
 import { useState } from "react";
 import ExerciseCard from "./ExerciseCard";
+import { ProfileProvider } from "./ProfileContext";
 
 function App() {
     const [day, setDay] = useState("Monday");
@@ -60,6 +61,7 @@ function completeExercise(exerciseName) {
 }
 
     return (
+         <ProfileProvider>
         <div>
             <h1>FitSync Workout Planner</h1>
 
@@ -104,6 +106,7 @@ function completeExercise(exerciseName) {
                 setName={setName}
             />
         </div>
+        </ProfileProvider>
     );
 }
 

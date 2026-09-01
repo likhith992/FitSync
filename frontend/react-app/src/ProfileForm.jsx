@@ -1,12 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
+import { ProfileContext } from "./ProfileContext";
 
 function ProfileForm({ name, setName }) {
+    const { profile, setProfile } = useContext(ProfileContext);
 
-    const [profile, setProfile] = useState({
-        age: "",
-        height: "",
-        weight: ""
-    });
+   
 
     const [profileCreated, setProfileCreated] = useState(false);
 
