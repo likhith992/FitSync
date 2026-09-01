@@ -4,7 +4,7 @@ function ExerciseCard(props) {
             <h3>{props.name}</h3>
             <p>Sets: {props.sets}</p>
             <p>Reps: {props.reps}</p>
-            <button onClick={props.onComplete}>
+ <button onClick={() => props.onComplete(props.name)}>
     Complete Exercise
 </button>
         </div>

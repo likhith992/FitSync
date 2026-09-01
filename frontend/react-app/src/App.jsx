@@ -55,9 +55,9 @@ function App() {
     );
 }
 
-function completeExercise() {
-    console.log("Exercise completed!");
-} 
+function completeExercise(exerciseName) {
+    console.log(exerciseName + " completed!");
+}
 
     return (
         <div>
