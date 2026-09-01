@@ -2,6 +2,7 @@ import ProfileForm from "./ProfileForm";
 import { useState } from "react";
 import ExerciseCard from "./ExerciseCard";
 import { ProfileProvider } from "./ProfileContext";
+import ProfileSummary from "./ProfileSummary";
 
 function App() {
     const [day, setDay] = useState("Monday");
@@ -105,6 +106,7 @@ function completeExercise(exerciseName) {
                 name={name}
                 setName={setName}
             />
+            <ProfileSummary />
         </div>
         </ProfileProvider>
     );
