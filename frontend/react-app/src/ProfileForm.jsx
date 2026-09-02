@@ -2,23 +2,18 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { ProfileContext } from "./ProfileContext";
 
 function ProfileForm()  {
-const { name, setName } = useContext(ProfileContext);
-    
-
-   
-
+    const { profile, dispatch } = useContext(ProfileContext);
     const [profileCreated, setProfileCreated] = useState(false);
 
     const nameInputRef = useRef(null);
 
     useEffect(() => {
         console.log("Name changed:", name);
-    }, [name]);
+    }, [profile.name]);
 
     function handleSubmit(event) {
         event.preventDefault();
-
-        console.log("Name:", name);
+        console.log("Name:", profile.name);
         console.log("Age:", profile.age);
         console.log("Height:", profile.height);
         console.log("Weight:", profile.weight);
@@ -37,8 +32,13 @@ const { name, setName } = useContext(ProfileContext);
                 <input
                     ref={nameInputRef}
                     type="text"
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
+                  value={profile.name}
+onChange={(event) =>
+    dispatch({
+        type: "setName",
+        value: event.target.value
+    })
+}
                 />
 
                 <button
@@ -48,50 +48,50 @@ const { name, setName } = useContext(ProfileContext);
                     Focus Name
                 </button>
 
-                <p>Your name: {name}</p>
+              <p>Your name: {profile.name}</p>
 
                 <label>Age:</label>
 
-                <input
-                    type="number"
-                    value={profile.age}
-                    onChange={(event) =>
-                        setProfile(prevProfile => ({
-                            ...prevProfile,
-                            age: event.target.value
-                        }))
-                    }
-                />
+               <input
+    type="number"
+    value={profile.age}
+    onChange={(event) =>
+        dispatch({
+            type: "setAge",
+            value: event.target.value
+        })
+    }
+/>
 
                 <p>Your age: {profile.age}</p>
 
                 <label>Height (cm):</label>
 
                 <input
-                    type="number"
-                    value={profile.height}
-                    onChange={(event) =>
-                        setProfile(prevProfile => ({
-                            ...prevProfile,
-                            height: event.target.value
-                        }))
-                    }
-                />
+    type="number"
+    value={profile.height}
+    onChange={(event) =>
+        dispatch({
+            type: "setHeight",
+            value: event.target.value
+        })
+    }
+/>
 
                 <p>Your height: {profile.height} cm</p>
 
                 <label>Weight (kg):</label>
 
-                <input
-                    type="number"
-                    value={profile.weight}
-                    onChange={(event) =>
-                        setProfile(prevProfile => ({
-                            ...prevProfile,
-                            weight: event.target.value
-                        }))
-                    }
-                />
+               <input
+    type="number"
+    value={profile.weight}
+    onChange={(event) =>
+        dispatch({
+            type: "setWeight",
+            value: event.target.value
+        })
+    }
+/>
 
                 <p>Your weight: {profile.weight} kg</p>
 
@@ -104,7 +104,7 @@ const { name, setName } = useContext(ProfileContext);
             {profileCreated && (
                 <div>
                     <h3>Profile Created!</h3>
-                    <p>Name: {name}</p>
+                    <p>Name: {profile.name}</p>
                     <p>Age: {profile.age}</p>
                     <p>Height: {profile.height} cm</p>
                     <p>Weight: {profile.weight} kg</p>
