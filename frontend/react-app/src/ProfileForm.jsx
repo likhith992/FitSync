@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { ProfileContext } from "./ProfileContext";
 
-function ProfileForm({ name, setName }) {
-    const { profile, setProfile } = useContext(ProfileContext);
+function ProfileForm()  {
+const { name, setName } = useContext(ProfileContext);
+    
 
    
 

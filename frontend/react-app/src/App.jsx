@@ -6,8 +6,7 @@ import ProfileSummary from "./ProfileSummary";
 
 function App() {
     const [day, setDay] = useState("Monday");
-    const [name, setName] = useState("");
-
+      
     const [exercises, setExercises] = useState([
         {
             name: "Bench Press",
@@ -102,10 +101,7 @@ function completeExercise(exerciseName) {
                 />
             ))}
 
-            <ProfileForm
-                name={name}
-                setName={setName}
-            />
+            <ProfileForm/>
             <ProfileSummary />
         </div>
         </ProfileProvider>
