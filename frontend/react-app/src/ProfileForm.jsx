@@ -1,15 +1,21 @@
-import { useState, useEffect, useRef, useContext } from "react";
-import { ProfileContext } from "./ProfileContext";
+import { useState, useRef } from "react";
+import useProfile from "./useProfile";
+import useProfileLogger from "./useProfileLogger";
 
 function ProfileForm()  {
-    const { profile, dispatch } = useContext(ProfileContext);
+    const {
+    profile,
+    setName,
+    setAge,
+    setHeight,
+    setWeight
+} = useProfile();
+
     const [profileCreated, setProfileCreated] = useState(false);
 
     const nameInputRef = useRef(null);
 
-    useEffect(() => {
-        console.log("Name changed:", name);
-    }, [profile.name]);
+  useProfileLogger(profile.name);
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -34,10 +40,7 @@ function ProfileForm()  {
                     type="text"
                   value={profile.name}
 onChange={(event) =>
-    dispatch({
-        type: "setName",
-        value: event.target.value
-    })
+    setName(event.target.value)
 }
                 />
 
@@ -56,11 +59,8 @@ onChange={(event) =>
     type="number"
     value={profile.age}
     onChange={(event) =>
-        dispatch({
-            type: "setAge",
-            value: event.target.value
-        })
-    }
+    setAge(event.target.value)
+}
 />
 
                 <p>Your age: {profile.age}</p>
@@ -70,12 +70,9 @@ onChange={(event) =>
                 <input
     type="number"
     value={profile.height}
-    onChange={(event) =>
-        dispatch({
-            type: "setHeight",
-            value: event.target.value
-        })
-    }
+  onChange={(event) =>
+    setHeight(event.target.value)
+}
 />
 
                 <p>Your height: {profile.height} cm</p>
@@ -85,12 +82,9 @@ onChange={(event) =>
                <input
     type="number"
     value={profile.weight}
-    onChange={(event) =>
-        dispatch({
-            type: "setWeight",
-            value: event.target.value
-        })
-    }
+   onChange={(event) =>
+    setWeight(event.target.value)
+}
 />
 
                 <p>Your weight: {profile.weight} kg</p>
