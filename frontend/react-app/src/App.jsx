@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Workout from "./pages/Workout";
 import Profile from "./pages/Profile";
 import Exercise from "./pages/Exercise";
+import NotFound from "./pages/NotFound";
 
 function App() {
     return (
@@ -27,6 +28,8 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
 
                 <Route path="/exercise/:exerciseName" element={<Exercise />} />
+
+                <Route path="*" element={<NotFound />} />
 
             </Routes>
 
