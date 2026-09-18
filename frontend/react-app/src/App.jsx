@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, NavLink, useLocation  } from "react-router-dom";
 import { ProfileProvider } from "./ProfileContext";
 
 import Home from "./pages/Home";
@@ -6,33 +6,52 @@ import Workout from "./pages/Workout";
 import Profile from "./pages/Profile";
 import Exercise from "./pages/Exercise";
 import NotFound from "./pages/NotFound";
+import TodayWorkout from "./pages/TodayWorkout";
 
 function App() {
+    const location = useLocation();
     return (
         <ProfileProvider>
 
             <nav>
-                <Link to="/">Home</Link>
-                {" | "}
-                <Link to="/workout">Workout</Link>
-                {" | "}
-                <Link to="/profile">Profile</Link>
-            </nav>
+    <NavLink to="/">Home</NavLink>
+    {" | "}
 
-            <Routes>
+    <NavLink
+        to="/workout"
+        className={({ isActive }) =>
+            isActive ? "active" : ""
+        }
+    >
+        Workout
+    </NavLink>
 
-                <Route path="/" element={<Home />} />
+    {" | "}
+    <NavLink to="/profile">Profile</NavLink>
 
-                <Route path="/workout" element={<Workout />} />
+    <p>Current page: {location.pathname}</p>
+</nav>
 
-                <Route path="/profile" element={<Profile />} />
+           <Routes>
 
-                <Route path="/exercise/:exerciseName" element={<Exercise />} />
+    <Route path="/" element={<Home />} />
 
-                <Route path="*" element={<NotFound />} />
+    <Route path="/workout" element={<Workout />}>
 
-            </Routes>
+        <Route path="today" element={<TodayWorkout />} />
 
+    </Route>
+
+    <Route path="/profile" element={<Profile />} />
+
+    <Route
+    path="/exercise/:exerciseId/:exerciseName"
+    element={<Exercise />}
+/>
+
+    <Route path="*" element={<NotFound />} />
+
+</Routes>
         </ProfileProvider>
     );
 }

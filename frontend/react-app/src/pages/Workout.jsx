@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import ExerciseCard from "../ExerciseCard";
 
@@ -96,6 +97,9 @@ function Workout() {
                     onComplete={completeExercise}
                 />
             ))}
+
+            <Outlet />
+            
         </div>
     );
 }
