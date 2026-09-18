@@ -7,16 +7,19 @@ function Workout() {
 
     const [exercises, setExercises] = useState([
         {
+            id: 1,
             name: "Bench Press",
             sets: 3,
             reps: 8
         },
         {
+            id: 2,
             name: "Incline Dumbbell Press",
             sets: 3,
             reps: 10
         },
         {
+            id: 3,
             name: "Push Ups",
             sets: 3,
             reps: 12
@@ -91,6 +94,7 @@ function Workout() {
             {exercises.map((exercise) => (
                 <ExerciseCard
                     key={exercise.name}
+                     id={exercise.id}
                     name={exercise.name}
                     sets={exercise.sets}
                     reps={exercise.reps}

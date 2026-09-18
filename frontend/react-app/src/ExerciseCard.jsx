@@ -4,9 +4,9 @@ function ExerciseCard(props) {
     return (
         <div>
             <h3>
-                <Link to={`/exercise/${props.name}`}>
-                    {props.name}
-                </Link>
+                <Link to={`/exercise/${props.id}/${props.name}`}>
+            {props.name}
+            </Link>
             </h3>
 
             <p>Sets: {props.sets}</p>
