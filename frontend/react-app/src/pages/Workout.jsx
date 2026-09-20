@@ -1,30 +1,54 @@
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ExerciseCard from "../ExerciseCard";
 
 function Workout() {
     const [day, setDay] = useState("Monday");
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-    const [exercises, setExercises] = useState([
-        {
-            id: 1,
-            name: "Bench Press",
-            sets: 3,
-            reps: 8
-        },
-        {
-            id: 2,
-            name: "Incline Dumbbell Press",
-            sets: 3,
-            reps: 10
-        },
-        {
-            id: 3,
-            name: "Push Ups",
-            sets: 3,
-            reps: 12
+   const [exercises, setExercises] = useState([]);
+
+   async function getExercises() {
+
+    try {
+
+        setLoading(true);
+        setError("");
+
+        const response = await fetch(
+            "https://jsonplaceholder.typicode.com/users"
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch exercises");
         }
-    ]);
+
+        const data = await response.json();
+
+        const exerciseData = data.slice(0, 3).map((user, index) => ({
+            id: user.id,
+            name: user.name,
+            sets: 3,
+            reps: 8 + index * 2
+        }));
+
+        setExercises(exerciseData);
+
+    } catch (error) {
+
+        setError(error.message);
+
+    } finally {
+
+        setLoading(false);
+
+    }
+}
+
+useEffect(() => {
+    getExercises();
+}, []);
 
     const hasWorkout = exercises.length > 0;
 
@@ -32,6 +56,7 @@ function Workout() {
         setExercises(prevExercises => [
             ...prevExercises,
             {
+                 id: Date.now(),
                 name: "Tricep Pushdown",
                 sets: 3,
                 reps: 12
@@ -40,22 +65,22 @@ function Workout() {
     }
 
     function updateExercise() {
-        setExercises(prevExercises =>
-            prevExercises.map(exercise =>
-                exercise.name === "Bench Press"
-                    ? { ...exercise, sets: 4 }
-                    : exercise
-            )
-        );
-    }
+    setExercises(prevExercises =>
+        prevExercises.map(exercise =>
+            exercise.id === 1
+                ? { ...exercise, sets: 4 }
+                : exercise
+        )
+    );
+}
 
     function removeExercise() {
-        setExercises(prevExercises =>
-            prevExercises.filter(exercise =>
-                exercise.name !== "Push Ups"
-            )
-        );
-    }
+    setExercises(prevExercises =>
+        prevExercises.filter(exercise =>
+            exercise.id !== 3
+        )
+    );
+}
 
     function completeExercise(exerciseName) {
         console.log(exerciseName + " completed!");
@@ -64,6 +89,8 @@ function Workout() {
     return (
         <div>
             <h1>FitSync Workout Planner</h1>
+            {error && <p>{error}</p>}
+{loading && <p>Loading exercises...</p>}
 
             <h2>{day}'s Workout</h2>
 
@@ -84,16 +111,16 @@ function Workout() {
             </button>
 
             <button onClick={updateExercise}>
-                Update Bench Press
-            </button>
+    Update First Exercise
+</button>
 
-            <button onClick={removeExercise}>
-                Remove Push Ups
-            </button>
+<button onClick={removeExercise}>
+    Remove Third Exercise
+</button>
 
             {exercises.map((exercise) => (
                 <ExerciseCard
-                    key={exercise.name}
+                    key={exercise.id}
                      id={exercise.id}
                     name={exercise.name}
                     sets={exercise.sets}

@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import Exercise from "./pages/Exercise";
 import NotFound from "./pages/NotFound";
 import TodayWorkout from "./pages/TodayWorkout";
+import ApiPractice from "./pages/ApiPractice";
 
 function App() {
     const location = useLocation();
@@ -49,6 +50,7 @@ function App() {
     element={<Exercise />}
 />
 
+<Route path="/api-practice" element={<ApiPractice />} />
     <Route path="*" element={<NotFound />} />
 
 </Routes>
