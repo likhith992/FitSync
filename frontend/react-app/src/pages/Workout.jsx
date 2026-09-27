@@ -1,136 +1,357 @@
-import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ExerciseCard from "../ExerciseCard";
+
+const API_URL = "http://127.0.0.1:8000/api/exercises/";
 
 function Workout() {
-    const [day, setDay] = useState("Monday");
+    const [exercises, setExercises] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-   const [exercises, setExercises] = useState([]);
+    const [selectedDay, setSelectedDay] = useState("Monday");
 
-   async function getExercises() {
+    const [newExercise, setNewExercise] = useState({
+        name: "",
+        sets: 3,
+        reps: 10,
+    });
 
-    try {
+    // -----------------------------------
+    // LOAD EXERCISES
+    // -----------------------------------
+    const loadExercises = async () => {
+        try {
+            setLoading(true);
+            setError("");
 
-        setLoading(true);
-        setError("");
+            const response = await fetch(API_URL);
 
-        const response = await fetch(
-            "https://jsonplaceholder.typicode.com/users"
-        );
+            if (!response.ok) {
+                throw new Error("Failed to load exercises");
+            }
 
-        if (!response.ok) {
-            throw new Error("Failed to fetch exercises");
+            const data = await response.json();
+
+            setExercises(data);
+        } catch (err) {
+            console.error(err);
+            setError("Could not connect to Django API.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        loadExercises();
+    }, []);
+
+    // -----------------------------------
+    // ADD EXERCISE
+    // -----------------------------------
+    const addExercise = async () => {
+        const name = prompt("Enter exercise name:");
+
+        if (!name || !name.trim()) {
+            return;
         }
 
-        const data = await response.json();
+        const sets = prompt("Enter number of sets:", "3");
+        const reps = prompt("Enter number of reps:", "10");
 
-        const exerciseData = data.slice(0, 3).map((user, index) => ({
-            id: user.id,
-            name: user.name,
-            sets: 3,
-            reps: 8 + index * 2
-        }));
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: name.trim(),
+                    sets: Number(sets) || 3,
+                    reps: Number(reps) || 10,
+                }),
+            });
 
-        setExercises(exerciseData);
+            const data = await response.json();
 
-    } catch (error) {
-
-        setError(error.message);
-
-    } finally {
-
-        setLoading(false);
-
-    }
-}
-
-useEffect(() => {
-    getExercises();
-}, []);
-
-    const hasWorkout = exercises.length > 0;
-
-    function addExercise() {
-        setExercises(prevExercises => [
-            ...prevExercises,
-            {
-                 id: Date.now(),
-                name: "Tricep Pushdown",
-                sets: 3,
-                reps: 12
+            if (!response.ok) {
+                throw new Error(data.error || "Failed to add exercise");
             }
-        ]);
-    }
 
-    function updateExercise() {
-    setExercises(prevExercises =>
-        prevExercises.map(exercise =>
-            exercise.id === 1
-                ? { ...exercise, sets: 4 }
-                : exercise
-        )
-    );
-}
+            setExercises((previous) => [
+                ...previous,
+                data,
+            ]);
 
-    function removeExercise() {
-    setExercises(prevExercises =>
-        prevExercises.filter(exercise =>
-            exercise.id !== 3
-        )
-    );
-}
+        } catch (err) {
+            console.error(err);
+            setError(err.message);
+        }
+    };
 
-    function completeExercise(exerciseName) {
-        console.log(exerciseName + " completed!");
-    }
+    // -----------------------------------
+    // UPDATE EXERCISE
+    // -----------------------------------
+    const updateExercise = async (exercise) => {
+        const name = prompt(
+            "Enter new exercise name:",
+            exercise.name
+        );
 
+        if (name === null) {
+            return;
+        }
+
+        const sets = prompt(
+            "Enter number of sets:",
+            exercise.sets
+        );
+
+        if (sets === null) {
+            return;
+        }
+
+        const reps = prompt(
+            "Enter number of reps:",
+            exercise.reps
+        );
+
+        if (reps === null) {
+            return;
+        }
+
+        try {
+            const response = await fetch(API_URL, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    id: exercise.id,
+                    name: name.trim(),
+                    sets: Number(sets),
+                    reps: Number(reps),
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.error || "Failed to update exercise"
+                );
+            }
+
+            setExercises((previous) =>
+                previous.map((item) =>
+                    item.id === exercise.id
+                        ? data
+                        : item
+                )
+            );
+
+        } catch (err) {
+            console.error(err);
+            setError(err.message);
+        }
+    };
+
+    // -----------------------------------
+    // DELETE EXERCISE
+    // -----------------------------------
+    const deleteExercise = async (exerciseId) => {
+        const confirmDelete = window.confirm(
+            "Are you sure you want to remove this exercise?"
+        );
+
+        if (!confirmDelete) {
+            return;
+        }
+
+        try {
+            const response = await fetch(API_URL, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    id: exerciseId,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.error || "Failed to delete exercise"
+                );
+            }
+
+            setExercises((previous) =>
+                previous.filter(
+                    (exercise) => exercise.id !== exerciseId
+                )
+            );
+
+        } catch (err) {
+            console.error(err);
+            setError(err.message);
+        }
+    };
+
+    // -----------------------------------
+    // COMPLETE EXERCISE
+    // -----------------------------------
+    const completeExercise = async (exercise) => {
+        try {
+            const response = await fetch(API_URL, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    id: exercise.id,
+                    completed: !exercise.completed,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.error || "Failed to update exercise"
+                );
+            }
+
+            setExercises((previous) =>
+                previous.map((item) =>
+                    item.id === exercise.id
+                        ? data
+                        : item
+                )
+            );
+
+        } catch (err) {
+            console.error(err);
+            setError(err.message);
+        }
+    };
+
+    // -----------------------------------
+    // PAGE
+    // -----------------------------------
     return (
-        <div>
+        <div
+            style={{
+                maxWidth: "900px",
+                margin: "0 auto",
+                padding: "40px 20px",
+                textAlign: "center",
+            }}
+        >
             <h1>FitSync Workout Planner</h1>
-            {error && <p>{error}</p>}
-{loading && <p>Loading exercises...</p>}
 
-            <h2>{day}'s Workout</h2>
+            <h2>{selectedDay}'s Workout</h2>
 
-            <select onChange={(event) => setDay(event.target.value)}>
+            <select
+                value={selectedDay}
+                onChange={(e) =>
+                    setSelectedDay(e.target.value)
+                }
+            >
                 <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
                 <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
                 <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
             </select>
 
-            {hasWorkout ? (
-                <p>Workout Ready!</p>
-            ) : (
-                <p>No workout available.</p>
-            )}
+            <p>
+                {loading
+                    ? "Loading workout..."
+                    : "Workout Ready!"}
+            </p>
 
-            <button onClick={addExercise}>
+            {/* ADD BUTTON */}
+            <button
+                onClick={addExercise}
+                style={{ margin: "5px" }}
+            >
                 Add Exercise
             </button>
 
-            <button onClick={updateExercise}>
-    Update First Exercise
-</button>
+            {error && (
+                <p style={{ color: "red" }}>
+                    {error}
+                </p>
+            )}
 
-<button onClick={removeExercise}>
-    Remove Third Exercise
-</button>
+            {/* EXERCISES */}
+            {!loading &&
+                exercises.length === 0 && (
+                    <p>No exercises found.</p>
+                )}
 
             {exercises.map((exercise) => (
-                <ExerciseCard
+                <div
                     key={exercise.id}
-                     id={exercise.id}
-                    name={exercise.name}
-                    sets={exercise.sets}
-                    reps={exercise.reps}
-                    onComplete={completeExercise}
-                />
-            ))}
+                    style={{
+                        margin: "30px 0",
+                        padding: "20px",
+                    }}
+                >
+                    <h3
+                        style={{
+                            textDecoration:
+                                exercise.completed
+                                    ? "line-through"
+                                    : "none",
+                        }}
+                    >
+                        {exercise.name}
+                    </h3>
 
-            <Outlet />
-            
+                    <p>
+                        Sets: {exercise.sets}
+                    </p>
+
+                    <p>
+                        Reps: {exercise.reps}
+                    </p>
+
+                    {/* COMPLETE */}
+                    <button
+                        onClick={() =>
+                            completeExercise(exercise)
+                        }
+                        style={{ margin: "5px" }}
+                    >
+                        {exercise.completed
+                            ? "Completed ✓"
+                            : "Complete Exercise"}
+                    </button>
+
+                    {/* UPDATE */}
+                    <button
+                        onClick={() =>
+                            updateExercise(exercise)
+                        }
+                        style={{ margin: "5px" }}
+                    >
+                        Update
+                    </button>
+
+                    {/* DELETE */}
+                    <button
+                        onClick={() =>
+                            deleteExercise(exercise.id)
+                        }
+                        style={{ margin: "5px" }}
+                    >
+                        Remove
+                    </button>
+                </div>
+            ))}
         </div>
     );
 }
