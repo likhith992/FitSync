@@ -9,13 +9,21 @@ def exercises(request):
 
     # GET - get all exercises
     if request.method == "GET":
+        day = request.GET.get("day")
+
+        if day:
+            exercises = Exercise.objects.filter(day=day)
+        else:
+            exercises = Exercise.objects.all()
+
         exercise_list = list(
-            Exercise.objects.all().values(
+            exercises.values(
                 "id",
                 "name",
                 "sets",
                 "reps",
                 "completed",
+                "day",
             )
         )
 
@@ -31,6 +39,7 @@ def exercises(request):
                 sets=int(data.get("sets", 3)),
                 reps=int(data.get("reps", 10)),
                 completed=False,
+                day=data.get("day", "Monday"),
             )
 
             return JsonResponse(
@@ -40,6 +49,7 @@ def exercises(request):
                     "sets": exercise.sets,
                     "reps": exercise.reps,
                     "completed": exercise.completed,
+                    "day": exercise.day,
                 },
                 status=201,
             )
@@ -77,6 +87,9 @@ def exercises(request):
             if "completed" in data:
                 exercise.completed = data["completed"]
 
+            if "day" in data:
+                exercise.day = data["day"]
+
             exercise.save()
 
             return JsonResponse(
@@ -86,6 +99,7 @@ def exercises(request):
                     "sets": exercise.sets,
                     "reps": exercise.reps,
                     "completed": exercise.completed,
+                    "day": exercise.day,
                 }
             )
 

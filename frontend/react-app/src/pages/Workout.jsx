@@ -16,14 +16,16 @@ function Workout() {
     });
 
     // -----------------------------------
-    // LOAD EXERCISES
+    // LOAD EXERCISES FOR SELECTED DAY
     // -----------------------------------
     const loadExercises = async () => {
         try {
             setLoading(true);
             setError("");
 
-            const response = await fetch(API_URL);
+            const response = await fetch(
+                `${API_URL}?day=${encodeURIComponent(selectedDay)}`
+            );
 
             if (!response.ok) {
                 throw new Error("Failed to load exercises");
@@ -35,6 +37,7 @@ function Workout() {
         } catch (err) {
             console.error(err);
             setError("Could not connect to Django API.");
+            setExercises([]);
         } finally {
             setLoading(false);
         }
@@ -42,38 +45,39 @@ function Workout() {
 
     useEffect(() => {
         loadExercises();
-    }, []);
+    }, [selectedDay]);
 
     // -----------------------------------
     // ADD EXERCISE
     // -----------------------------------
     const addExercise = async () => {
-        const name = prompt("Enter exercise name:");
-
-        if (!name || !name.trim()) {
+        if (!newExercise.name.trim()) {
+            setError("Please enter an exercise name.");
             return;
         }
 
-        const sets = prompt("Enter number of sets:", "3");
-        const reps = prompt("Enter number of reps:", "10");
-
         try {
+            setError("");
+
             const response = await fetch(API_URL, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    name: name.trim(),
-                    sets: Number(sets) || 3,
-                    reps: Number(reps) || 10,
+                    name: newExercise.name.trim(),
+                    sets: Number(newExercise.sets),
+                    reps: Number(newExercise.reps),
+                    day: selectedDay,
                 }),
             });
 
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.error || "Failed to add exercise");
+                throw new Error(
+                    data.error || "Failed to add exercise"
+                );
             }
 
             setExercises((previous) => [
@@ -81,6 +85,11 @@ function Workout() {
                 data,
             ]);
 
+            setNewExercise({
+                name: "",
+                sets: 3,
+                reps: 10,
+            });
         } catch (err) {
             console.error(err);
             setError(err.message);
@@ -119,6 +128,8 @@ function Workout() {
         }
 
         try {
+            setError("");
+
             const response = await fetch(API_URL, {
                 method: "PUT",
                 headers: {
@@ -129,6 +140,7 @@ function Workout() {
                     name: name.trim(),
                     sets: Number(sets),
                     reps: Number(reps),
+                    day: selectedDay,
                 }),
             });
 
@@ -147,7 +159,6 @@ function Workout() {
                         : item
                 )
             );
-
         } catch (err) {
             console.error(err);
             setError(err.message);
@@ -167,6 +178,8 @@ function Workout() {
         }
 
         try {
+            setError("");
+
             const response = await fetch(API_URL, {
                 method: "DELETE",
                 headers: {
@@ -190,7 +203,6 @@ function Workout() {
                     (exercise) => exercise.id !== exerciseId
                 )
             );
-
         } catch (err) {
             console.error(err);
             setError(err.message);
@@ -202,6 +214,8 @@ function Workout() {
     // -----------------------------------
     const completeExercise = async (exercise) => {
         try {
+            setError("");
+
             const response = await fetch(API_URL, {
                 method: "PUT",
                 headers: {
@@ -210,6 +224,7 @@ function Workout() {
                 body: JSON.stringify({
                     id: exercise.id,
                     completed: !exercise.completed,
+                    day: selectedDay,
                 }),
             });
 
@@ -228,7 +243,6 @@ function Workout() {
                         : item
                 )
             );
-
         } catch (err) {
             console.error(err);
             setError(err.message);
@@ -272,13 +286,92 @@ function Workout() {
                     : "Workout Ready!"}
             </p>
 
-            {/* ADD BUTTON */}
-            <button
-                onClick={addExercise}
-                style={{ margin: "5px" }}
+            {/* ADD EXERCISE */}
+            <div
+                style={{
+                    maxWidth: "650px",
+                    margin: "20px auto",
+                    padding: "24px",
+                    border: "1px solid #ddd",
+                    borderRadius: "16px",
+                    backgroundColor: "#fff",
+                    boxShadow:
+                        "0 4px 12px rgba(0, 0, 0, 0.08)",
+                    textAlign: "left",
+                }}
             >
-                Add Exercise
-            </button>
+                <h3 style={{ marginTop: 0 }}>
+                    Add New Exercise
+                </h3>
+
+                <input
+                    type="text"
+                    placeholder="Exercise name"
+                    value={newExercise.name}
+                    onChange={(e) =>
+                        setNewExercise({
+                            ...newExercise,
+                            name: e.target.value,
+                        })
+                    }
+                    style={{
+                        width: "100%",
+                        padding: "10px",
+                        marginBottom: "10px",
+                        boxSizing: "border-box",
+                    }}
+                />
+
+                <input
+                    type="number"
+                    min="1"
+                    placeholder="Sets"
+                    value={newExercise.sets}
+                    onChange={(e) =>
+                        setNewExercise({
+                            ...newExercise,
+                            sets: e.target.value,
+                        })
+                    }
+                    style={{
+                        width: "100%",
+                        padding: "10px",
+                        marginBottom: "10px",
+                        boxSizing: "border-box",
+                    }}
+                />
+
+                <input
+                    type="number"
+                    min="1"
+                    placeholder="Reps"
+                    value={newExercise.reps}
+                    onChange={(e) =>
+                        setNewExercise({
+                            ...newExercise,
+                            reps: e.target.value,
+                        })
+                    }
+                    style={{
+                        width: "100%",
+                        padding: "10px",
+                        marginBottom: "10px",
+                        boxSizing: "border-box",
+                    }}
+                />
+
+                <button
+                    onClick={addExercise}
+                    style={{
+                        padding: "10px 16px",
+                        borderRadius: "8px",
+                        border: "none",
+                        cursor: "pointer",
+                    }}
+                >
+                    Add Exercise
+                </button>
+            </div>
 
             {error && (
                 <p style={{ color: "red" }}>
@@ -289,19 +382,35 @@ function Workout() {
             {/* EXERCISES */}
             {!loading &&
                 exercises.length === 0 && (
-                    <p>No exercises found.</p>
+                    <p>
+                        No exercises found for{" "}
+                        {selectedDay}.
+                    </p>
                 )}
 
             {exercises.map((exercise) => (
                 <div
                     key={exercise.id}
                     style={{
-                        margin: "30px 0",
-                        padding: "20px",
+                        margin: "20px auto",
+                        padding: "24px",
+                        maxWidth: "650px",
+                        border: "1px solid #ddd",
+                        borderRadius: "16px",
+                        backgroundColor:
+                            exercise.completed
+                                ? "#f0fdf4"
+                                : "#ffffff",
+                        boxShadow:
+                            "0 4px 12px rgba(0, 0, 0, 0.08)",
+                        textAlign: "left",
                     }}
                 >
+                    {/* Exercise name */}
                     <h3
                         style={{
+                            margin: "0 0 12px 0",
+                            fontSize: "22px",
                             textDecoration:
                                 exercise.completed
                                     ? "line-through"
@@ -311,45 +420,81 @@ function Workout() {
                         {exercise.name}
                     </h3>
 
-                    <p>
-                        Sets: {exercise.sets}
-                    </p>
-
-                    <p>
-                        Reps: {exercise.reps}
-                    </p>
-
-                    {/* COMPLETE */}
-                    <button
-                        onClick={() =>
-                            completeExercise(exercise)
-                        }
-                        style={{ margin: "5px" }}
+                    {/* Sets and reps */}
+                    <div
+                        style={{
+                            display: "flex",
+                            gap: "30px",
+                            marginBottom: "20px",
+                            color: "#555",
+                        }}
                     >
-                        {exercise.completed
-                            ? "Completed ✓"
-                            : "Complete Exercise"}
-                    </button>
+                        <span>
+                            <strong>Sets:</strong>{" "}
+                            {exercise.sets}
+                        </span>
 
-                    {/* UPDATE */}
-                    <button
-                        onClick={() =>
-                            updateExercise(exercise)
-                        }
-                        style={{ margin: "5px" }}
-                    >
-                        Update
-                    </button>
+                        <span>
+                            <strong>Reps:</strong>{" "}
+                            {exercise.reps}
+                        </span>
+                    </div>
 
-                    {/* DELETE */}
-                    <button
-                        onClick={() =>
-                            deleteExercise(exercise.id)
-                        }
-                        style={{ margin: "5px" }}
+                    {/* Buttons */}
+                    <div
+                        style={{
+                            display: "flex",
+                            gap: "10px",
+                            flexWrap: "wrap",
+                        }}
                     >
-                        Remove
-                    </button>
+                        <button
+                            onClick={() =>
+                                completeExercise(exercise)
+                            }
+                            style={{
+                                padding: "10px 16px",
+                                borderRadius: "8px",
+                                border: "none",
+                                cursor: "pointer",
+                            }}
+                        >
+                            {exercise.completed
+                                ? "Completed ✓"
+                                : "Complete Exercise"}
+                        </button>
+
+                        <button
+                            onClick={() =>
+                                updateExercise(exercise)
+                            }
+                            style={{
+                                padding: "10px 16px",
+                                borderRadius: "8px",
+                                border: "1px solid #ccc",
+                                backgroundColor: "#fff",
+                                cursor: "pointer",
+                            }}
+                        >
+                            Update
+                        </button>
+
+                        <button
+                            onClick={() =>
+                                deleteExercise(
+                                    exercise.id
+                                )
+                            }
+                            style={{
+                                padding: "10px 16px",
+                                borderRadius: "8px",
+                                border: "none",
+                                cursor: "pointer",
+                            }}
+                        >
+                            Remove
+                        </button>
+                    </div>
                 </div>
             ))}
         </div>
