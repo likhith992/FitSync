@@ -16,11 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from fitness.views import exercises, exercise_detail
+from fitness.views import exercises, exercise_detail, meals
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
 
     path("api/exercises/", exercises),
     path("api/exercises/<int:exercise_id>/", exercise_detail),
+
+    path("api/meals/", meals),
 ]
