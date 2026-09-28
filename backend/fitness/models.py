@@ -10,3 +10,12 @@ class Exercise(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Meal(models.Model):
+    name = models.CharField(max_length=200)
+    meal_type = models.CharField(max_length=50)
+    calories = models.IntegerField()
+
+    def __str__(self):
+        return self.name
