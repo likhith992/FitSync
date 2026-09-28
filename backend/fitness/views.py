@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Exercise
+from .models import Exercise, Meal
 import json
 
 
@@ -207,6 +207,55 @@ def exercise_detail(request, exercise_id):
         return JsonResponse(
             {"message": "Exercise deleted successfully"}
         )
+
+    return JsonResponse(
+        {"error": "Method not allowed"},
+        status=405,
+    )
+
+
+@csrf_exempt
+def meals(request):
+
+    # GET - get all meals
+    if request.method == "GET":
+        meal_list = list(
+            Meal.objects.all().values(
+                "id",
+                "name",
+                "meal_type",
+                "calories",
+            )
+        )
+
+        return JsonResponse(meal_list, safe=False)
+
+    # POST - add meal
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+
+            meal = Meal.objects.create(
+                name=data.get("name", "New Meal"),
+                meal_type=data.get("meal_type", "Snack"),
+                calories=int(data.get("calories", 0)),
+            )
+
+            return JsonResponse(
+                {
+                    "id": meal.id,
+                    "name": meal.name,
+                    "meal_type": meal.meal_type,
+                    "calories": meal.calories,
+                },
+                status=201,
+            )
+
+        except Exception as e:
+            return JsonResponse(
+                {"error": str(e)},
+                status=400,
+            )
 
     return JsonResponse(
         {"error": "Method not allowed"},
