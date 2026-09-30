@@ -4,6 +4,7 @@ import { ProfileProvider } from "./ProfileContext";
 import Home from "./pages/Home";
 import Workout from "./pages/Workout";
 import Profile from "./pages/Profile";
+import Diet from "./pages/Diet";
 import Exercise from "./pages/Exercise";
 import NotFound from "./pages/NotFound";
 import TodayWorkout from "./pages/TodayWorkout";
@@ -44,6 +45,8 @@ function App() {
     </Route>
 
     <Route path="/profile" element={<Profile />} />
+
+    <Route path="/diet" element={<Diet />} />
 
     <Route
     path="/exercise/:exerciseId/:exerciseName"
