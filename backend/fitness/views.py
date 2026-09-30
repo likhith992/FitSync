@@ -182,6 +182,9 @@ def exercise_detail(request, exercise_id):
             if "completed" in data:
                 exercise.completed = data["completed"]
 
+            if "day" in data:
+                exercise.day = data["day"]
+
             exercise.save()
 
             return JsonResponse(
@@ -191,6 +194,7 @@ def exercise_detail(request, exercise_id):
                     "sets": exercise.sets,
                     "reps": exercise.reps,
                     "completed": exercise.completed,
+                    "day": exercise.day,
                 }
             )
 
@@ -255,6 +259,31 @@ def meals(request):
             return JsonResponse(
                 {"error": str(e)},
                 status=400,
+            )
+
+    return JsonResponse(
+        {"error": "Method not allowed"},
+        status=405,
+    )
+
+
+@csrf_exempt
+def meal_detail(request, meal_id):
+
+    if request.method == "DELETE":
+        try:
+            meal = Meal.objects.get(id=meal_id)
+
+            meal.delete()
+
+            return JsonResponse(
+                {"message": "Meal deleted successfully"}
+            )
+
+        except Meal.DoesNotExist:
+            return JsonResponse(
+                {"error": "Meal not found"},
+                status=404,
             )
 
     return JsonResponse(
