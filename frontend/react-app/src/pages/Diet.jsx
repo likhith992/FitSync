@@ -7,6 +7,11 @@ function Diet() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
+    // Form state
+    const [name, setName] = useState("");
+    const [mealType, setMealType] = useState("Breakfast");
+    const [calories, setCalories] = useState("");
+
     const loadMeals = async () => {
         try {
             setLoading(true);
@@ -33,6 +38,46 @@ function Diet() {
         loadMeals();
     }, []);
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            setError("");
+
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: name,
+                    meal_type: mealType,
+                    calories: Number(calories),
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to add meal");
+            }
+
+            const newMeal = await response.json();
+
+            // Add the new meal to the existing list
+            setMeals((previousMeals) => [
+                ...previousMeals,
+                newMeal,
+            ]);
+
+            // Clear the form
+            setName("");
+            setMealType("Breakfast");
+            setCalories("");
+        } catch (err) {
+            console.error(err);
+            setError("Could not add meal.");
+        }
+    };
+
     return (
         <div
             style={{
@@ -56,6 +101,101 @@ function Diet() {
                 </p>
             )}
 
+            {/* Add Meal Form */}
+            <form
+                onSubmit={handleSubmit}
+                style={{
+                    maxWidth: "650px",
+                    margin: "30px auto",
+                    padding: "24px",
+                    border: "1px solid #ddd",
+                    borderRadius: "16px",
+                    backgroundColor: "#f9f9f9",
+                    textAlign: "left",
+                }}
+            >
+                <h2>Add Meal</h2>
+
+                <div style={{ marginBottom: "16px" }}>
+                    <label>
+                        <strong>Meal Name</strong>
+                    </label>
+
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(event) =>
+                            setName(event.target.value)
+                        }
+                        placeholder="Example: Oatmeal"
+                        required
+                        style={{
+                            width: "100%",
+                            padding: "10px",
+                            marginTop: "6px",
+                            boxSizing: "border-box",
+                        }}
+                    />
+                </div>
+
+                <div style={{ marginBottom: "16px" }}>
+                    <label>
+                        <strong>Meal Type</strong>
+                    </label>
+
+                    <select
+                        value={mealType}
+                        onChange={(event) =>
+                            setMealType(event.target.value)
+                        }
+                        style={{
+                            width: "100%",
+                            padding: "10px",
+                            marginTop: "6px",
+                        }}
+                    >
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Snack">Snack</option>
+                    </select>
+                </div>
+
+                <div style={{ marginBottom: "16px" }}>
+                    <label>
+                        <strong>Calories</strong>
+                    </label>
+
+                    <input
+                        type="number"
+                        value={calories}
+                        onChange={(event) =>
+                            setCalories(event.target.value)
+                        }
+                        placeholder="Example: 300"
+                        min="0"
+                        required
+                        style={{
+                            width: "100%",
+                            padding: "10px",
+                            marginTop: "6px",
+                            boxSizing: "border-box",
+                        }}
+                    />
+                </div>
+
+                <button
+                    type="submit"
+                    style={{
+                        padding: "10px 20px",
+                        cursor: "pointer",
+                    }}
+                >
+                    Add Meal
+                </button>
+            </form>
+
+            {/* Meal List */}
             {!loading && meals.length === 0 && (
                 <p>No meals found.</p>
             )}
