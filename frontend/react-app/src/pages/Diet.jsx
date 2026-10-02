@@ -7,10 +7,16 @@ function Diet() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    // Form state
+    // Add meal form
     const [name, setName] = useState("");
     const [mealType, setMealType] = useState("Breakfast");
     const [calories, setCalories] = useState("");
+
+    // Edit meal state
+    const [editingMealId, setEditingMealId] = useState(null);
+    const [editName, setEditName] = useState("");
+    const [editMealType, setEditMealType] = useState("Breakfast");
+    const [editCalories, setEditCalories] = useState("");
 
     const loadMeals = async () => {
         try {
@@ -112,6 +118,65 @@ function Diet() {
         }
     };
 
+    // Start editing a meal
+    const startEditing = (meal) => {
+        setEditingMealId(meal.id);
+        setEditName(meal.name);
+        setEditMealType(meal.meal_type);
+        setEditCalories(meal.calories);
+    };
+
+    // Cancel editing
+    const cancelEditing = () => {
+        setEditingMealId(null);
+        setEditName("");
+        setEditMealType("Breakfast");
+        setEditCalories("");
+    };
+
+    // PUT - Update meal
+    const handleUpdate = async (event, mealId) => {
+        event.preventDefault();
+
+        try {
+            setError("");
+
+            const response = await fetch(
+                `${API_URL}${mealId}/`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name: editName,
+                        meal_type: editMealType,
+                        calories: Number(editCalories),
+                    }),
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Failed to update meal");
+            }
+
+            const updatedMeal = await response.json();
+
+            setMeals((previousMeals) =>
+                previousMeals.map((meal) =>
+                    meal.id === updatedMeal.id
+                        ? updatedMeal
+                        : meal
+                )
+            );
+
+            cancelEditing();
+        } catch (err) {
+            console.error(err);
+            setError("Could not update meal.");
+        }
+    };
+
     return (
         <div
             style={{
@@ -188,10 +253,18 @@ function Diet() {
                             marginTop: "6px",
                         }}
                     >
-                        <option value="Breakfast">Breakfast</option>
-                        <option value="Lunch">Lunch</option>
-                        <option value="Dinner">Dinner</option>
-                        <option value="Snack">Snack</option>
+                        <option value="Breakfast">
+                            Breakfast
+                        </option>
+                        <option value="Lunch">
+                            Lunch
+                        </option>
+                        <option value="Dinner">
+                            Dinner
+                        </option>
+                        <option value="Snack">
+                            Snack
+                        </option>
                     </select>
                 </div>
 
@@ -249,28 +322,180 @@ function Diet() {
                         textAlign: "left",
                     }}
                 >
-                    <h3>{meal.name}</h3>
+                    {editingMealId === meal.id ? (
+                        /* Edit form */
+                        <form
+                            onSubmit={(event) =>
+                                handleUpdate(event, meal.id)
+                            }
+                        >
+                            <h3>Edit Meal</h3>
 
-                    <p>
-                        <strong>Meal Type:</strong>{" "}
-                        {meal.meal_type}
-                    </p>
+                            <div
+                                style={{
+                                    marginBottom: "12px",
+                                }}
+                            >
+                                <label>
+                                    <strong>Meal Name</strong>
+                                </label>
 
-                    <p>
-                        <strong>Calories:</strong>{" "}
-                        {meal.calories} kcal
-                    </p>
+                                <input
+                                    type="text"
+                                    value={editName}
+                                    onChange={(event) =>
+                                        setEditName(
+                                            event.target.value
+                                        )
+                                    }
+                                    required
+                                    style={{
+                                        width: "100%",
+                                        padding: "10px",
+                                        marginTop: "6px",
+                                        boxSizing:
+                                            "border-box",
+                                    }}
+                                />
+                            </div>
 
-                    <button
-                        onClick={() => handleDelete(meal.id)}
-                        style={{
-                            marginTop: "10px",
-                            padding: "8px 16px",
-                            cursor: "pointer",
-                        }}
-                    >
-                        Delete Meal
-                    </button>
+                            <div
+                                style={{
+                                    marginBottom: "12px",
+                                }}
+                            >
+                                <label>
+                                    <strong>
+                                        Meal Type
+                                    </strong>
+                                </label>
+
+                                <select
+                                    value={editMealType}
+                                    onChange={(event) =>
+                                        setEditMealType(
+                                            event.target.value
+                                        )
+                                    }
+                                    style={{
+                                        width: "100%",
+                                        padding: "10px",
+                                        marginTop: "6px",
+                                    }}
+                                >
+                                    <option value="Breakfast">
+                                        Breakfast
+                                    </option>
+                                    <option value="Lunch">
+                                        Lunch
+                                    </option>
+                                    <option value="Dinner">
+                                        Dinner
+                                    </option>
+                                    <option value="Snack">
+                                        Snack
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div
+                                style={{
+                                    marginBottom: "12px",
+                                }}
+                            >
+                                <label>
+                                    <strong>
+                                        Calories
+                                    </strong>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    value={editCalories}
+                                    onChange={(event) =>
+                                        setEditCalories(
+                                            event.target.value
+                                        )
+                                    }
+                                    min="0"
+                                    required
+                                    style={{
+                                        width: "100%",
+                                        padding: "10px",
+                                        marginTop: "6px",
+                                        boxSizing:
+                                            "border-box",
+                                    }}
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                style={{
+                                    padding: "8px 16px",
+                                    marginRight: "10px",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                Save Changes
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={cancelEditing}
+                                style={{
+                                    padding: "8px 16px",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                Cancel
+                            </button>
+                        </form>
+                    ) : (
+                        /* Normal meal display */
+                        <>
+                            <h3>{meal.name}</h3>
+
+                            <p>
+                                <strong>
+                                    Meal Type:
+                                </strong>{" "}
+                                {meal.meal_type}
+                            </p>
+
+                            <p>
+                                <strong>
+                                    Calories:
+                                </strong>{" "}
+                                {meal.calories} kcal
+                            </p>
+
+                            <button
+                                onClick={() =>
+                                    startEditing(meal)
+                                }
+                                style={{
+                                    padding: "8px 16px",
+                                    marginRight: "10px",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                Edit Meal
+                            </button>
+
+                            <button
+                                onClick={() =>
+                                    handleDelete(meal.id)
+                                }
+                                style={{
+                                    padding: "8px 16px",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                Delete Meal
+                            </button>
+                        </>
+                    )}
                 </div>
             ))}
         </div>
