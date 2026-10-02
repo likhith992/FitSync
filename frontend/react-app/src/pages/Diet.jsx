@@ -38,6 +38,7 @@ function Diet() {
         loadMeals();
     }, []);
 
+    // POST - Add meal
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -62,19 +63,52 @@ function Diet() {
 
             const newMeal = await response.json();
 
-            // Add the new meal to the existing list
             setMeals((previousMeals) => [
                 ...previousMeals,
                 newMeal,
             ]);
 
-            // Clear the form
             setName("");
             setMealType("Breakfast");
             setCalories("");
         } catch (err) {
             console.error(err);
             setError("Could not add meal.");
+        }
+    };
+
+    // DELETE - Remove meal
+    const handleDelete = async (mealId) => {
+        const confirmed = window.confirm(
+            "Are you sure you want to delete this meal?"
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+            setError("");
+
+            const response = await fetch(
+                `${API_URL}${mealId}/`,
+                {
+                    method: "DELETE",
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Failed to delete meal");
+            }
+
+            setMeals((previousMeals) =>
+                previousMeals.filter(
+                    (meal) => meal.id !== mealId
+                )
+            );
+        } catch (err) {
+            console.error(err);
+            setError("Could not delete meal.");
         }
     };
 
@@ -226,6 +260,17 @@ function Diet() {
                         <strong>Calories:</strong>{" "}
                         {meal.calories} kcal
                     </p>
+
+                    <button
+                        onClick={() => handleDelete(meal.id)}
+                        style={{
+                            marginTop: "10px",
+                            padding: "8px 16px",
+                            cursor: "pointer",
+                        }}
+                    >
+                        Delete Meal
+                    </button>
                 </div>
             ))}
         </div>
