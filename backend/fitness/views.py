@@ -270,21 +270,53 @@ def meals(request):
 @csrf_exempt
 def meal_detail(request, meal_id):
 
-    if request.method == "DELETE":
+    try:
+        meal = Meal.objects.get(id=meal_id)
+
+    except Meal.DoesNotExist:
+        return JsonResponse(
+            {"error": "Meal not found"},
+            status=404,
+        )
+
+    # PUT - update one meal
+    if request.method == "PUT":
         try:
-            meal = Meal.objects.get(id=meal_id)
+            data = json.loads(request.body)
 
-            meal.delete()
+            if "name" in data:
+                meal.name = data["name"]
+
+            if "meal_type" in data:
+                meal.meal_type = data["meal_type"]
+
+            if "calories" in data:
+                meal.calories = int(data["calories"])
+
+            meal.save()
 
             return JsonResponse(
-                {"message": "Meal deleted successfully"}
+                {
+                    "id": meal.id,
+                    "name": meal.name,
+                    "meal_type": meal.meal_type,
+                    "calories": meal.calories,
+                }
             )
 
-        except Meal.DoesNotExist:
+        except Exception as e:
             return JsonResponse(
-                {"error": "Meal not found"},
-                status=404,
+                {"error": str(e)},
+                status=400,
             )
+
+    # DELETE - delete one meal
+    if request.method == "DELETE":
+        meal.delete()
+
+        return JsonResponse(
+            {"message": "Meal deleted successfully"}
+        )
 
     return JsonResponse(
         {"error": "Method not allowed"},
