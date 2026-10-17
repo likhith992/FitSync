@@ -33,6 +33,13 @@ function Diet() {
     const [editCalories, setEditCalories] = useState("");
     const [editMealDate, setEditMealDate] = useState(getTodayDate());
 
+    // Daily Diet Summary: calculated from meals for the selected date.
+    const totalCalories = meals.reduce(
+        (total, meal) => total + Number(meal.calories || 0),
+        0
+    );
+    const totalMeals = meals.length;
+
     const loadMeals = async (dateToLoad) => {
         try {
             setLoading(true);
@@ -348,6 +355,37 @@ function Diet() {
                     Show Today
                 </button>
             </div>
+
+            {/* Daily Diet Summary */}
+            {!loading && (
+                <div
+                    style={{
+                        maxWidth: "650px",
+                        margin: "30px auto",
+                        padding: "24px",
+                        border: "1px solid #ddd",
+                        borderRadius: "16px",
+                        backgroundColor: "#f9f9f9",
+                        textAlign: "left",
+                    }}
+                >
+                    <h2>Daily Diet Summary</h2>
+
+                    <p>
+                        <strong>Date:</strong> {selectedDate}
+                    </p>
+
+                    <p>
+                        <strong>Total Calories:</strong>{" "}
+                        {totalCalories} kcal
+                    </p>
+
+                    <p>
+                        <strong>Meals Logged:</strong>{" "}
+                        {totalMeals}
+                    </p>
+                </div>
+            )}
 
             {/* Meal List: only meals for the selected date. */}
             {!loading && meals.length === 0 && (
