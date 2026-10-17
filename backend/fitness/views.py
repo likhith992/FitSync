@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import Exercise, Meal
 import json
+from datetime import date
 
 
 @csrf_exempt
@@ -218,10 +219,11 @@ def exercise_detail(request, exercise_id):
     )
 
 
+
 @csrf_exempt
 def meals(request):
 
-    # GET - get all meals
+    # GET - get all meals, including their dates
     if request.method == "GET":
         meal_list = list(
             Meal.objects.all().values(
@@ -229,20 +231,24 @@ def meals(request):
                 "name",
                 "meal_type",
                 "calories",
+                "date",
             )
         )
 
         return JsonResponse(meal_list, safe=False)
 
-    # POST - add meal
+    # POST - add a meal with a date
     if request.method == "POST":
         try:
             data = json.loads(request.body)
+
+            meal_date = data.get("date") or date.today().isoformat()
 
             meal = Meal.objects.create(
                 name=data.get("name", "New Meal"),
                 meal_type=data.get("meal_type", "Snack"),
                 calories=int(data.get("calories", 0)),
+                date=meal_date,
             )
 
             return JsonResponse(
@@ -251,6 +257,7 @@ def meals(request):
                     "name": meal.name,
                     "meal_type": meal.meal_type,
                     "calories": meal.calories,
+                    "date": meal.date,
                 },
                 status=201,
             )
@@ -293,6 +300,9 @@ def meal_detail(request, meal_id):
             if "calories" in data:
                 meal.calories = int(data["calories"])
 
+            if "date" in data:
+                meal.date = data["date"]
+
             meal.save()
 
             return JsonResponse(
@@ -301,6 +311,7 @@ def meal_detail(request, meal_id):
                     "name": meal.name,
                     "meal_type": meal.meal_type,
                     "calories": meal.calories,
+                    "date": meal.date,
                 }
             )
 
