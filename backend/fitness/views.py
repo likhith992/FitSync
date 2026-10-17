@@ -223,10 +223,18 @@ def exercise_detail(request, exercise_id):
 @csrf_exempt
 def meals(request):
 
-    # GET - get all meals, including their dates
+   
+    # GET - get all meals or filter by date
     if request.method == "GET":
+        meal_date = request.GET.get("date")
+
+        if meal_date:
+            meals_queryset = Meal.objects.filter(date=meal_date)
+        else:
+            meals_queryset = Meal.objects.all()
+
         meal_list = list(
-            Meal.objects.all().values(
+            meals_queryset.values(
                 "id",
                 "name",
                 "meal_type",
