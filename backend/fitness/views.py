@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Exercise, Meal
+from .models import Exercise, Meal, DietGoal
 import json
 from datetime import date
 
@@ -340,4 +340,47 @@ def meal_detail(request, meal_id):
     return JsonResponse(
         {"error": "Method not allowed"},
         status=405,
+    )
+
+
+
+@csrf_exempt
+def diet_goal(request):
+    # GET - retrieve the saved calorie target
+    if request.method == "GET":
+        goal, created = DietGoal.objects.get_or_create(id=1)
+
+        return JsonResponse({
+            "daily_calorie_target": goal.daily_calorie_target
+        })
+
+    # PUT - update the saved calorie target
+    if request.method == "PUT":
+        try:
+            data = json.loads(request.body)
+            target = int(data.get("daily_calorie_target", 0))
+
+            if target <= 0:
+                return JsonResponse(
+                    {"error": "Calorie target must be greater than zero"},
+                    status=400
+                )
+
+            goal, created = DietGoal.objects.get_or_create(id=1)
+            goal.daily_calorie_target = target
+            goal.save()
+
+            return JsonResponse({
+                "daily_calorie_target": goal.daily_calorie_target
+            })
+
+        except (ValueError, TypeError, json.JSONDecodeError):
+            return JsonResponse(
+                {"error": "Please provide a valid calorie target"},
+                status=400
+            )
+
+    return JsonResponse(
+        {"error": "Method not allowed"},
+        status=405
     )

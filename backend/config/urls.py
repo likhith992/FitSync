@@ -29,6 +29,7 @@ from fitness.views import (
     exercise_detail,
     meals,
     meal_detail,
+    diet_goal,
 )
 
 
@@ -42,4 +43,7 @@ urlpatterns = [
     # Diet API
     path("api/meals/", meals),
     path("api/meals/<int:meal_id>/", meal_detail),
+
+    # Diet Goal API
+    path("api/diet-goal/", diet_goal),
 ]
