@@ -17,6 +17,9 @@ function Diet() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
+    // Date whose meals are currently displayed.
+    const [selectedDate, setSelectedDate] = useState(getTodayDate());
+
     // Add meal form state
     const [name, setName] = useState("");
     const [mealType, setMealType] = useState("Breakfast");
@@ -30,12 +33,14 @@ function Diet() {
     const [editCalories, setEditCalories] = useState("");
     const [editMealDate, setEditMealDate] = useState(getTodayDate());
 
-    const loadMeals = async () => {
+    const loadMeals = async (dateToLoad) => {
         try {
             setLoading(true);
             setError("");
 
-            const response = await fetch(API_URL);
+            const response = await fetch(
+                `${API_URL}?date=${encodeURIComponent(dateToLoad)}`
+            );
 
             if (!response.ok) {
                 throw new Error("Failed to load meals");
@@ -52,8 +57,8 @@ function Diet() {
     };
 
     useEffect(() => {
-        loadMeals();
-    }, []);
+        loadMeals(selectedDate);
+    }, [selectedDate]);
 
     // POST - Add a meal, including its selected date.
     const handleSubmit = async (event) => {
@@ -81,15 +86,16 @@ function Diet() {
 
             const newMeal = await response.json();
 
-            setMeals((previousMeals) => [
-                ...previousMeals,
-                newMeal,
-            ]);
-
             setName("");
             setMealType("Breakfast");
             setCalories("");
             setMealDate(getTodayDate());
+
+            if (mealDate === selectedDate) {
+                setMeals((previousMeals) => [...previousMeals, newMeal]);
+            } else {
+                setSelectedDate(mealDate);
+            }
         } catch (err) {
             console.error(err);
             setError("Could not add meal.");
@@ -170,13 +176,17 @@ function Diet() {
 
             const updatedMeal = await response.json();
 
-            setMeals((previousMeals) =>
-                previousMeals.map((meal) =>
-                    meal.id === updatedMeal.id ? updatedMeal : meal
-                )
-            );
-
             cancelEditing();
+
+            if (updatedMeal.date !== selectedDate) {
+                setSelectedDate(updatedMeal.date);
+            } else {
+                setMeals((previousMeals) =>
+                    previousMeals.map((meal) =>
+                        meal.id === updatedMeal.id ? updatedMeal : meal
+                    )
+                );
+            }
         } catch (err) {
             console.error(err);
             setError("Could not update meal.");
@@ -195,7 +205,7 @@ function Diet() {
             <h1>FitSync Diet</h1>
 
             <p>
-                {loading ? "Loading meals..." : "Meals loaded successfully!"}
+                {loading ? "Loading meals..." : `Meals for ${selectedDate}`}
             </p>
 
             {error && (
@@ -304,8 +314,45 @@ function Diet() {
                 </button>
             </form>
 
-            {/* Meal List */}
-            {!loading && meals.length === 0 && <p>No meals found.</p>}
+            {/* Date selector for viewing meals from a particular day. */}
+            <div
+                style={{
+                    maxWidth: "650px",
+                    margin: "30px auto",
+                    padding: "20px",
+                    border: "1px solid #ddd",
+                    borderRadius: "16px",
+                    textAlign: "left",
+                }}
+            >
+                <label htmlFor="selected-meal-date">
+                    <strong>View Meals for Date</strong>
+                </label>
+                <input
+                    id="selected-meal-date"
+                    type="date"
+                    value={selectedDate}
+                    onChange={(event) => setSelectedDate(event.target.value)}
+                    style={{
+                        width: "100%",
+                        padding: "10px",
+                        marginTop: "6px",
+                        boxSizing: "border-box",
+                    }}
+                />
+                <button
+                    type="button"
+                    onClick={() => setSelectedDate(getTodayDate())}
+                    style={{ marginTop: "12px", padding: "8px 16px", cursor: "pointer" }}
+                >
+                    Show Today
+                </button>
+            </div>
+
+            {/* Meal List: only meals for the selected date. */}
+            {!loading && meals.length === 0 && (
+                <p>No meals found for {selectedDate}.</p>
+            )}
 
             {meals.map((meal) => (
                 <div
