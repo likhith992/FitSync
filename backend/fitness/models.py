@@ -20,3 +20,10 @@ class Meal(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class DietGoal(models.Model):
+    daily_calorie_target = models.PositiveIntegerField(default=2000)
+
+    def __str__(self):
+        return f"Daily calorie target: {self.daily_calorie_target} kcal"
