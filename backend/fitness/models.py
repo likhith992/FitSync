@@ -16,6 +16,7 @@ class Meal(models.Model):
     name = models.CharField(max_length=200)
     meal_type = models.CharField(max_length=50)
     calories = models.IntegerField()
+    date = models.DateField()
 
     def __str__(self):
         return self.name
